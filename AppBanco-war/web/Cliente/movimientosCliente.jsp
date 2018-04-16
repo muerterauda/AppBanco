@@ -18,7 +18,6 @@
             </jsp:include>
             <div id="content">
                 <div id="content-header">
-                    <%=request.getAttribute("cliente").toString()%>
                 </div>
                 <div id="content-main">
                     <table class="full-width">

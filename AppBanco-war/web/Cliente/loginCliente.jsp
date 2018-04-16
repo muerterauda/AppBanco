@@ -16,7 +16,7 @@
     <body>
     <div id="content-app-medium">
 
-           <form method="post" action="Prueba2" name="datos" accept-charset="UTF-8">
+           <form method="post" action="loginClienteServlet" name="datos" accept-charset="UTF-8">
                <h1>Banco no corrupto</h1>
                <hr />
                <p><span>DNI: </span><input type="text" name="dni"></p>
