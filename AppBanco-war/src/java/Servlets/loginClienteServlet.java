@@ -6,7 +6,9 @@
 package Servlets;
 
 import AppBanco.ejb.ClienteFacade;
+import AppBanco.ejb.CuentaFacade;
 import AppBanco.entity.Cliente;
+import AppBanco.entity.Cuenta;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -39,16 +41,23 @@ public class loginClienteServlet extends HttpServlet {
           String dni= request.getParameter("dni");
           String password= request.getParameter("password");
           Cliente cliente=Conectorcliente.find(dni);
-          if(cliente==null||!cliente.getContrasenya().equals(password)){
+          Cuenta cuenta=null;
+          if(cliente!=null){
+              cuenta=cliente.getCuentaList().get(0);
+          }
+          if(cliente==null||!cliente.getContrasenya().equals(password)||cuenta!=null){
               if(cliente==null){
-                   request.setAttribute("error", "Error: No existe el empleado");
-              }else{
+                   request.setAttribute("error", "Error: No existe el usuario");
+              }else if(!cliente.getContrasenya().equals(password)){
                   request.setAttribute("error", "Error: La contrase&ntilde;a no coincide");
+              }else{
+                  request.setAttribute("error", "Error: Error con la cuenta contacta con el banco");
               }
               RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Cliente/loginCliente.jsp");
               rd.forward(request, response);
           }else{
               HttpSession sesion= request.getSession();
+              
               sesion.setAttribute("cuenta", null);
               sesion.setAttribute("cliente", cliente);
               request.removeAttribute("error");
