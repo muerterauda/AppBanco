@@ -36,11 +36,15 @@ public class loginEmpleadoServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        int idEmpleado = Integer.parseInt(request.getParameter("numeroEmpleado"));
-        String password = request.getParameter("password");
+        int idEmpleado = -1;
+        String password = "";
+        
+        if (request.getParameter("numeroEmpleado")!=null || !request.getParameter("numeroEmpleado").equals("")) {
+            idEmpleado = Integer.parseInt(request.getParameter("numeroEmpleado"));
+            password = request.getParameter("password");
+        }
 
         Empleado empleado = ConectorEmpleado.find(idEmpleado);
         if (empleado == null || !empleado.getContrasenya().equals(password)) {
@@ -52,7 +56,7 @@ public class loginEmpleadoServlet extends HttpServlet {
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
             rd.forward(request, response);
         } else {
-
+            request.removeAttribute("error");
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/principalEmpleado.jsp");
             rd.forward(request, response);
         }
