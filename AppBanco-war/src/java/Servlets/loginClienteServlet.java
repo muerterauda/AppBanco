@@ -58,7 +58,7 @@ public class loginClienteServlet extends HttpServlet {
           }else{
               HttpSession sesion= request.getSession();
               
-              sesion.setAttribute("cuenta", null);
+              sesion.setAttribute("cuenta", cuenta);
               sesion.setAttribute("cliente", cliente);
               request.removeAttribute("error");
               RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Cliente/movimientosCliente.jsp");
