@@ -45,7 +45,7 @@ public class loginClienteServlet extends HttpServlet {
           if(cliente!=null){
               cuenta=cliente.getCuentaList().get(0);
           }
-          if(cliente==null||!cliente.getContrasenya().equals(password)||cuenta!=null){
+          if(cliente==null||!cliente.getContrasenya().equals(password)||cuenta==null){
               if(cliente==null){
                    request.setAttribute("error", "Error: No existe el usuario");
               }else if(!cliente.getContrasenya().equals(password)){
@@ -61,7 +61,8 @@ public class loginClienteServlet extends HttpServlet {
               sesion.setAttribute("cuenta", null);
               sesion.setAttribute("cliente", cliente);
               request.removeAttribute("error");
-              RequestDispatcher rd = this.getServletContext().getRequestDispatcher("movimientosClienteServlet");
+              RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Cliente/movimientosCliente.jsp");
+              //RequestDispatcher rd = this.getServletContext().getRequestDispatcher("movimientosClienteServlet");
               rd.forward(request, response);
           }
           
