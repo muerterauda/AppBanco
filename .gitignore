@@ -6,3 +6,5 @@ nbdist/
 .nb-gradle/
 /AppBanco2-war/nbproject/private/
 /AppBanco2-ejb/nbproject/private/
+*.properties
+*.xml

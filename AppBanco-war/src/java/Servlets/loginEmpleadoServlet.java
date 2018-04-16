@@ -5,8 +5,11 @@
  */
 package Servlets;
 
+import AppBanco.ejb.EmpleadoFacade;
+import AppBanco.entity.Empleado;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "loginEmpleadoServlet", urlPatterns = {"/loginEmpleadoServlet"})
 public class loginEmpleadoServlet extends HttpServlet {
 
+    @EJB
+    private EmpleadoFacade ConectorEmpleado;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,13 +39,24 @@ public class loginEmpleadoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            //Aqui falta la comprobacion de la base de datos.
-            
+        int idEmpleado = Integer.parseInt(request.getParameter("numeroEmpleado"));
+        String password = request.getParameter("password");
+
+        Empleado empleado = ConectorEmpleado.find(idEmpleado);
+        if (empleado == null || !empleado.getContrasenya().equals(password)) {
+            if (empleado == null) {
+                request.setAttribute("error", "Error: No existe el usuario");
+            } else {
+                request.setAttribute("error", "Error: La contrase&ntilde;a no coincide");
+            }
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
+            rd.forward(request, response);
+        } else {
+
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/principalEmpleado.jsp");
             rd.forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

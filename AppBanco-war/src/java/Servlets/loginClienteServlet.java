@@ -40,7 +40,7 @@ public class loginClienteServlet extends HttpServlet {
           Cliente cliente=Conectorcliente.find(dni);
           if(cliente==null||!cliente.getContrasenya().equals(password)){
               if(cliente==null){
-                   request.setAttribute("error", "Error: No existe el usuario");
+                   request.setAttribute("error", "Error: No existe el empleado");
               }else{
                   request.setAttribute("error", "Error: La contrase&ntilde;a no coincide");
               }
