@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -47,9 +48,11 @@ public class loginClienteServlet extends HttpServlet {
               RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Cliente/loginCliente.jsp");
               rd.forward(request, response);
           }else{
-              request.setAttribute("dniUsuario", dni);
+              HttpSession sesion= request.getSession();
+              sesion.setAttribute("cuenta", null);
+              sesion.setAttribute("cliente", cliente);
               request.removeAttribute("error");
-              RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Cliente/movimientosCliente.jsp");
+              RequestDispatcher rd = this.getServletContext().getRequestDispatcher("movimientosClienteServlet");
               rd.forward(request, response);
           }
           

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author GRJuanjo
  */
-@WebServlet(urlPatterns = {"/confirmTraspasoServlet"})
+@WebServlet(name="confirmTraspaso", urlPatterns = {"/confirmTraspasoServlet"})
 public class confirmTraspasoServlet extends HttpServlet {
 
     /**
