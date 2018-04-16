@@ -154,6 +154,13 @@ form .form-button-right input {
     position: relative;
 }
 
+.error {
+    background: #fef1ec;
+    color: black;
+    font-size: large;
+    text-align: center;
+}
+
 /* TABLAS */
 
 table {
@@ -262,6 +269,7 @@ tr:nth-child(odd) {
 }
 #navegador li:last-child {
   float: right;
+  margin-right: -4px;
 }
 #navegador ul {
   list-style: none;
@@ -304,7 +312,6 @@ tr:nth-child(odd) {
 }
 .login button{
     margin-left: 200px;
-    size: 200;
 }
 
 

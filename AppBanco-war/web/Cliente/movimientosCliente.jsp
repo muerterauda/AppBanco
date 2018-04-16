@@ -18,6 +18,7 @@
             </jsp:include>
             <div id="content">
                 <div id="content-header">
+                    <%=request.getAttribute("dniUsuario")%>
                 </div>
                 <div id="content-main">
                     <table class="full-width">
