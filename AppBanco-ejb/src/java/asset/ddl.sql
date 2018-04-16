@@ -7,6 +7,10 @@
  * Author:  user
  * Created: 09-abr-2018
  */
+CREATE DATABASE banco;
+
+USE banco;
+
 CREATE TABLE CLIENTE (
     dni VARCHAR(9) NOT NULL,
     nombre VARCHAR(30) NOT NULL,
