@@ -8,10 +8,10 @@
         <div id="nav">
                     <div id="navegador">
                     <ul>
-                        <li><a href="movimientosCliente.jsp">Movimientos</a></li>
-                        <li><a href="traspaso.jsp" >Transpasos</a></li>
-                        <li><a href="ayuda.jsp" >Ayuda</a></li>
-                        <li><a href="loginCliente.jsp">Cerrar sesión</a></li>
+                        <li><a href="movimientosClienteServlet">Movimientos</a></li>
+                        <li><a href="traspasoServlet" >Transpasos</a></li>
+                        <li><a href="ayudaServlet" >Ayuda</a></li>
+                        <li><a href="cerrarSesionServlet">Cerrar sesión</a></li>
                     </ul>
                         <div style="clear:both"></div>
                     </div>

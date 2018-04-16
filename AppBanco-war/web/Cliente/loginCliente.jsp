@@ -16,7 +16,7 @@
     <body>
     <div id="content-app-medium">
 
-           <form method="post" action="Prueba2" name="datos" accept-charset="UTF-8">
+           <form method="post" action="loginClienteServlet" name="datos" accept-charset="UTF-8">
                <h1>Banco no corrupto</h1>
                <hr />
                <p><span>DNI: </span><input type="text" name="dni"></p>
@@ -27,6 +27,12 @@
                    <div style="clear:both"></div>
                </div>
            </form>
+                   <% String error=(String)request.getAttribute("error");
+                      if(error!=null){ %>
+                         <div class="error"> 
+                             <p><%=error%></p>
+                        </div>
+                   <%   } %>
     </div>
     </body>
 </html>

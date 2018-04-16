@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author elias
+ * @author user
  */
-@WebServlet(name = "ppalEmpleadoServlet", urlPatterns = {"/ppalEmpleadoServlet"})
-public class ppalEmpleadoServlet extends HttpServlet {
+@WebServlet(name = "cerrarSesionServlet", urlPatterns = {"/cerrarSesionServlet"})
+public class cerrarSesionServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,7 +29,7 @@ public class ppalEmpleadoServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -37,10 +37,10 @@ public class ppalEmpleadoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ppalEmpleadoServlet</title>");            
+            out.println("<title>Servlet cerrarSesionServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ppalEmpleadoServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet cerrarSesionServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,7 +70,7 @@ public class ppalEmpleadoServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
