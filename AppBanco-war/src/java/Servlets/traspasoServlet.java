@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente;
+package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author GRJuanjo
  */
-@WebServlet(urlPatterns = {"/traspasoServlet"})
+@WebServlet(name="traspasoServlet",urlPatterns = {"/traspasoServlet"})
 public class traspasoServlet extends HttpServlet {
 
     /**

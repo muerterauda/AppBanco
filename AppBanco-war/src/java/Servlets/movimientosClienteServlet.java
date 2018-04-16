@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author GRJuanjo
  */
-@WebServlet(urlPatterns = {"/movimientosClienteServlet"})
+@WebServlet(name="movimientosClienteServlet", urlPatterns = {"/movimientosClienteServlet"})
 public class movimientosClienteServlet extends HttpServlet {
 
     /**
