@@ -7,9 +7,13 @@ package Servlets;
 
 import AppBanco.ejb.ClienteFacade;
 import AppBanco.ejb.CuentaFacade;
+import AppBanco.ejb.MovimientoFacade;
 import AppBanco.entity.Cliente;
 import AppBanco.entity.Cuenta;
+import AppBanco.entity.Movimiento;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,12 +25,14 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author GRJuanjo
+ * @author vikou
  */
-@WebServlet(name = "loginClienteServlet", urlPatterns = {"/loginClienteServlet"})
-public class loginClienteServlet extends HttpServlet {
+@WebServlet(name="MovimientoClienteServlet", urlPatterns = {"/Movimientos"})
+public class MovimientoClienteServlet extends HttpServlet {
+
     @EJB
-    private ClienteFacade Conectorcliente;
+    private MovimientoFacade movBD;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,35 +42,40 @@ public class loginClienteServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          String dni= request.getParameter("dni");
-          String password= request.getParameter("password");
-          Cliente cliente=Conectorcliente.find(dni);
-          Cuenta cuenta=null;
-          if(cliente!=null){
-              cuenta=cliente.getCuentaList().get(0);
-          }
-          if(cliente==null||!cliente.getContrasenya().equals(password)||cuenta==null){
-              if(cliente==null){
-                   request.setAttribute("error", "Error: No existe el usuario");
-              }else if(!cliente.getContrasenya().equals(password)){
-                  request.setAttribute("error", "Error: La contrase&ntilde;a no coincide");
-              }else{
-                  request.setAttribute("error", "Error: Error con la cuenta contacta con el banco");
-              }
-              RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Cliente/loginCliente.jsp");
-              rd.forward(request, response);
-          }else{
-              HttpSession sesion= request.getSession();
-              
-              sesion.setAttribute("cuenta", cuenta);
-              sesion.setAttribute("cliente", cliente);
-              request.removeAttribute("error");
-              RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Movimientos");
-              rd.forward(request, response);
-          }
-          
+        Cliente cliente = null;
+        Cuenta cuenta = null;
+        List<Movimiento> movimientos;
+        int saldo = 0;
+        HttpSession session = request.getSession();
+        
+        // Obtengo la sesión del cliente.
+        cliente = (Cliente) session.getAttribute("cliente");
+        cuenta = (Cuenta) session.getAttribute("cuenta");
+        
+        // Si el cliente tiene sesión ...
+        if (cliente != null) {
+            String concepto = request.getParameter("concepto");
+            String ingresos = request.getParameter("ingresos");
+            String gastos = request.getParameter("gastos");
+            
+            cuenta = cliente.getCuentaList().get(0);
+            movimientos = movBD.buscarPorCuentaOrderByFechaDesc(cuenta, ingresos != null, gastos != null, concepto == null ? "" : concepto);
+            
+            if (!movimientos.isEmpty())
+                saldo = movBD.getSaldoCuenta(cuenta.getNumeroCuenta());
+            
+            request.setAttribute("cliente", cliente);
+            request.setAttribute("movimientos", movimientos);
+            request.setAttribute("saldo", saldo);
+            request.setAttribute("concepto", concepto == null ? "" : concepto);
+            request.setAttribute("ingresos", new Boolean(ingresos != null));
+            request.setAttribute("gastos", new Boolean(gastos != null));
+        }
+        
+        RequestDispatcher dispacher = getServletContext().getRequestDispatcher("/Cliente/movimientosCliente.jsp");
+        dispacher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,7 +88,7 @@ public class loginClienteServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -91,7 +102,7 @@ public class loginClienteServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

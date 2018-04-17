@@ -7,10 +7,11 @@ package AppBanco.ejb;
 
 import AppBanco.entity.Cuenta;
 import AppBanco.entity.Movimiento;
-import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -30,15 +31,38 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
     public MovimientoFacade() {
         super(Movimiento.class);
     }
-    /**
-    @param tipo Debe ser Ingreso o Reintegro
-    @param em No debe ser null
-    */
-    public Movimiento crearMovimiento(int cantidad, Cuenta c, String concepto){
-        Movimiento m= null;
-        //CuentaFacade r = null;
-       // int saldo=r.getSaldoCuenta(c.getNumeroCuenta());
-        //m= new Movimiento(0,concepto, new Date(), cantidad, saldo);
-        return null;
+    
+    public List<Movimiento> buscarPorCuentaOrderByFechaDesc(Cuenta cuenta, Boolean ingreso, Boolean gastos, String concepto) {
+        String qq = "SELECT m FROM Movimiento m WHERE m.cuenta.numeroCuenta = :cuenta";
+        
+        if (concepto != null)
+            qq = qq + " AND m.concepto LIKE :concepto";
+        
+        if (ingreso && !gastos)
+            qq = qq + " AND m.importe >= 0";
+
+        if (!ingreso && gastos)
+            qq = qq + " AND m.importe < 0";
+        
+        qq = qq + " ORDER BY m.fecha DESC";
+        
+        Query query = getEntityManager()
+              .createQuery(qq);
+        query.setParameter("cuenta", cuenta.getNumeroCuenta());
+        
+        if (concepto != null)
+            query.setParameter("concepto", "%" + concepto + "%");
+        
+        return query.getResultList();
     }
+    
+    public int getSaldoCuenta(String numeroCuenta){
+        Movimiento result = null;
+        Query q= getEntityManager().createQuery("SELECT m FROM Movimiento m WHERE m.cuenta.numeroCuenta = :p ORDER BY m.fecha DESC");
+        q.setParameter("p", numeroCuenta);
+        result = (Movimiento) q.getResultList().get(0);
+
+        return result == null ? 0 : result.getSaldo();
+    }
+    
 }

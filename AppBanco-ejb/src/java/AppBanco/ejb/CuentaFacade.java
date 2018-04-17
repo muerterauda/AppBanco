@@ -6,6 +6,7 @@
 package AppBanco.ejb;
 
 import AppBanco.entity.Cuenta;
+import AppBanco.entity.Movimiento;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,11 +29,5 @@ public class CuentaFacade extends AbstractFacade<Cuenta> {
 
     public CuentaFacade() {
         super(Cuenta.class);
-    }
-    
-    public int getSaldoCuenta(String numeroCuenta){
-        Query q= em.createQuery("Select m.saldo from Movimiento m where m.cuenta.numeroCuenta== :p and Max(m.id)");
-        q.setParameter("p", numeroCuenta);
-        return q.getFirstResult();
     }
 }
