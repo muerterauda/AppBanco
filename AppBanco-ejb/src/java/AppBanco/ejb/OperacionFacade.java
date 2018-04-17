@@ -5,6 +5,7 @@
  */
 package AppBanco.ejb;
 
+import AppBanco.entity.Empleado;
 import AppBanco.entity.Operacion;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,5 +29,15 @@ public class OperacionFacade extends AbstractFacade<Operacion> {
     public OperacionFacade() {
         super(Operacion.class);
     }
-    
+    /**
+    @param tipo Debe ser Ingreso o Reintegro
+    @param em No debe ser null
+    */
+    public Operacion crearOperacionIngresoOReintegro(String tipo, Empleado em){
+        Operacion op=null;
+        op= new Operacion(0, tipo);
+        op.setEmpleado(em);
+        create(op);
+        return op;
+    }
 }

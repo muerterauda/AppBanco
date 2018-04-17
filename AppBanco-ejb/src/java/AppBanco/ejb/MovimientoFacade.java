@@ -5,7 +5,9 @@
  */
 package AppBanco.ejb;
 
+import AppBanco.entity.Cuenta;
 import AppBanco.entity.Movimiento;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,15 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
     public MovimientoFacade() {
         super(Movimiento.class);
     }
-    
+    /**
+    @param tipo Debe ser Ingreso o Reintegro
+    @param em No debe ser null
+    */
+    public Movimiento crearMovimiento(int cantidad, Cuenta c, String concepto){
+        Movimiento m= null;
+        //CuentaFacade r = null;
+       // int saldo=r.getSaldoCuenta(c.getNumeroCuenta());
+        //m= new Movimiento(0,concepto, new Date(), cantidad, saldo);
+        return null;
+    }
 }
