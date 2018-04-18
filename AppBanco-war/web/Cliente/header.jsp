@@ -8,7 +8,7 @@
         <div id="nav">
                     <div id="navegador">
                     <ul>
-                        <li><a href="movimientosClienteServlet">Movimientos</a></li>
+                        <li><a href="Movimientos">Movimientos</a></li>
                         <li><a href="traspasoServlet" >Transpasos</a></li>
                         <li><a href="ayudaServlet" >Ayuda</a></li>
                         <li><a href="cerrarSesionServlet">Cerrar sesión</a></li>

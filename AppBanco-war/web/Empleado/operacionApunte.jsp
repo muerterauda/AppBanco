@@ -10,17 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nuevo Apunte</title>
-        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+       <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     </head>
     <body>
-        <div class="">
+        <div id="content-app-medium">
             <h2>Nombre, DNI, Numero de cuenta</h2>
-           <form method="post" action="../operacionApunte" name="datos" accept-charset="UTF-8">
+           <form method="post" action="" name="datos" accept-charset="UTF-8">
                <p><span>Cantidad: </span><input name="cantidad"></p>
                <p><span>Accion</span></p>
-               <p><input type="radio" name="accion" value="I" />Ingreso</p>
-               <p><input type="radio" name="accion" value="R" />Retirada</p>
+               <p><input type="radio" name="operacion" value="I" />Ingreso</p>
+               <p><input type="radio" name="operacion" value="R" />Retirada</p>
             <button>Realizar apunte</button>
            </form>
             <%-- 
