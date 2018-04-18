@@ -7,6 +7,7 @@ package AppBanco.ejb;
 
 import AppBanco.entity.Cuenta;
 import AppBanco.entity.Movimiento;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,10 +33,15 @@ public class CuentaFacade extends AbstractFacade<Cuenta> {
     }
 
     public int getSaldoCuenta(String numeroCuenta) {
-        Movimiento result = null;
+        Movimiento result;
         Query q = em.createQuery("SELECT m FROM Movimiento m WHERE m.cuenta.numeroCuenta = :p ORDER BY m.fecha DESC");
         q.setParameter("p", numeroCuenta);
-        result = (Movimiento) q.getResultList().get(0);
+        List <Movimiento> list= q.getResultList();
+        if(list.isEmpty()||list==null){
+            result=null;
+        }else{
+          result = list.get(0);   
+        }
         return result == null ? 0 : result.getSaldo();
     }
 }

@@ -15,7 +15,6 @@
     </head>
     <body>
     <div id="content-app-medium">
-
            <form method="post" action="loginClienteServlet" name="datos" accept-charset="UTF-8">
                <h1>Banco no corrupto</h1>
                <hr />

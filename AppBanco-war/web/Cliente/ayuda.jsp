@@ -10,7 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ayuda</title>
-        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     </head>
     <body>
         <div id="content-app">

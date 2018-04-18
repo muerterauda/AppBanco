@@ -64,8 +64,7 @@ public class MovimientoClienteServlet extends HttpServlet {
             cuenta = cliente.getCuentaList().get(0);
             movimientos = movBD.buscarPorCuentaOrderByFechaDesc(cuenta, ingresos != null, gastos != null, concepto == null ? "" : concepto);
             
-            if (!movimientos.isEmpty())
-                saldo = cuenBD.getSaldoCuenta(cuenta.getNumeroCuenta());
+            saldo = cuenBD.getSaldoCuenta(cuenta.getNumeroCuenta());
             
             request.setAttribute("cliente", cliente);
             request.setAttribute("movimientos", movimientos);

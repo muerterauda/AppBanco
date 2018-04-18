@@ -6,6 +6,8 @@ package Servlets;
  * and open the template in the editor.
  */
 
+import AppBanco.ejb.CuentaFacade;
+import AppBanco.ejb.EmpleadoFacade;
 import AppBanco.ejb.MovimientoFacade;
 import AppBanco.ejb.OperacionFacade;
 import AppBanco.entity.Cuenta;
@@ -31,11 +33,14 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name="operacionApunteServlet",urlPatterns = {"/operacionApunte"})
 public class operacionApunteServlet extends HttpServlet {
 
-    @EJB 
-    private OperacionFacade ConectorOperacion;
     @EJB
     private MovimientoFacade ConectorMovimiento;
     
+    @EJB
+    private EmpleadoFacade ConectorEmpleado;
+    
+    @EJB
+    private CuentaFacade ConectorCuenta;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,27 +54,17 @@ public class operacionApunteServlet extends HttpServlet {
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
-        Empleado em=(Empleado)sesion.getAttribute("empleado");
-        Cuenta cuenta=(Cuenta)sesion.getAttribute("cuenta");
+        //Empleado em=(Empleado)sesion.getAttribute("empleado");
+        Empleado em= ConectorEmpleado.find(1);
+        
+        //Cuenta cuenta=(Cuenta)sesion.getAttribute("cuenta");
+        
+        Cuenta cuenta= ConectorCuenta.find("AAAA");
         Double cantidad=Double.parseDouble(request.getParameter("cantidad"));
         String operacion=request.getParameter("operacion");
-        Operacion op=null;
-        if(cantidad>0&&operacion.equals("R")){
-           op= new Operacion(cantidad.intValue(),"Reintegro"); 
-        }else if(cantidad>0){
-           op= new Operacion(cantidad.intValue(),"Ingreso");
-        }else{
-           request.setAttribute("error", "Error: cantidad nula o negativa");
-           RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/operacionApunte.jsp");
-           rd.forward(request, response);
-        }
-        op.setEmpleado(em);
-        ConectorOperacion.create(op);
-        Movimiento mov= new Movimiento(0,operacion.equals("R") ? "Reintegro" : "Ingreso", new Date(), cantidad.intValue(), 0); //Pregunta al profesor
-        mov.setOperacion(op);
-        mov.setCuenta(cuenta);
-        ConectorMovimiento.create(mov);
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("apuntesEmpleadoServlet");
+        ConectorMovimiento.nuevoApunte(operacion,em,cuenta,cantidad.intValue()); //cambiar futuro por int
+        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
+        //RequestDispatcher rd = this.getServletContext().getRequestDispatcher("apuntesEmpleadoServlet");
         rd.forward(request, response);
     }
 

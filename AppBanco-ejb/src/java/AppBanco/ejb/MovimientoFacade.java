@@ -6,8 +6,12 @@
 package AppBanco.ejb;
 
 import AppBanco.entity.Cuenta;
+import AppBanco.entity.Empleado;
 import AppBanco.entity.Movimiento;
+import AppBanco.entity.Operacion;
+import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,7 +26,13 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
 
     @PersistenceContext(unitName = "AppBanco-ejbPU")
     private EntityManager em;
-
+    
+    @EJB
+    private OperacionFacade opF;
+    
+    @EJB
+    private CuentaFacade cuF;
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -54,6 +64,38 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
             query.setParameter("concepto", "%" + concepto + "%");
         
         return query.getResultList();
+    }
+    /**
+     * Crea un nuevo apunte de Ingreso o Reintegro en una cuenta ya existente
+     * @param operacion I (Ingreso) o R (Reintegro)
+     * @param em Obejto Empleado, el que realiza la transaccion
+     * @param cuenta Cuenta a la que se va a realizar el apunte
+     * @param cantidad Cantidad referida al apunte, unsigned mayor que 0
+     */
+    public Movimiento nuevoApunte(String operacion, Empleado em, Cuenta cuenta, int cantidad) {
+        if(em==null||cuenta==null||cantidad<=0||!(operacion.equals("I")||operacion.equals("R"))){
+            throw new RuntimeException("Parametros incorrectos");
+        }else{
+            String concepto;
+            Movimiento mov;
+            int saldo= cuF.getSaldoCuenta(cuenta.getNumeroCuenta());
+            if(saldo-cantidad<0&&operacion.equals("R")){
+               throw new RuntimeException("Reintegro mayor que saldo actual");
+            }
+            if(operacion.equals("I")){
+                concepto="Ingreso";
+                saldo+=cantidad;
+            }else{
+                concepto="Reintegro";
+                saldo-=cantidad;
+            }
+            Operacion op=opF.crearOperacionIngresoOReintegro(concepto, em);
+            mov= new Movimiento(0, concepto, new Date(), saldo, saldo);
+            mov.setOperacion(op);
+            mov.setCuenta(cuenta);
+            create(mov);
+            return mov;
+        }
     }
     
 }

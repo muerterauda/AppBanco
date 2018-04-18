@@ -30,12 +30,13 @@ public class OperacionFacade extends AbstractFacade<Operacion> {
         super(Operacion.class);
     }
     /**
+     * CRea una operacion de Ingreso o Reintegro
     @param tipo Debe ser Ingreso o Reintegro
     @param em No debe ser null
     */
     public Operacion crearOperacionIngresoOReintegro(String tipo, Empleado em){
         Operacion op=null;
-        op= new Operacion(0, tipo);
+        op= new Operacion(4, tipo);
         op.setEmpleado(em);
         create(op);
         return op;

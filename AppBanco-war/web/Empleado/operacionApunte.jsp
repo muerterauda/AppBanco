@@ -15,20 +15,21 @@
     </head>
     <body>
         <div id="content-app-medium">
-            <h2>Nombre, DNI, Numero de cuenta</h2>
-           <form method="post" action="" name="datos" accept-charset="UTF-8">
+           <form method="post" action="../operacionApunte" name="datos" accept-charset="UTF-8">
+               <h2>Nombre, DNI, Numero de cuenta</h2>
+               <hr/>
                <p><span>Cantidad: </span><input name="cantidad"></p>
-               <p><span>Accion</span></p>
-               <p><input type="radio" name="operacion" value="I" />Ingreso</p>
-               <p><input type="radio" name="operacion" value="R" />Retirada</p>
-            <button>Realizar apunte</button>
+               <p><span>Accion</span>
+               <input type="radio" name="operacion" value="I" checked/>Ingreso
+               <input type="radio" name="operacion" value="R" />Retirada
+               </p>
+               <hr/>
+                <div class="form-button-right">
+                    <a href=""><input type="button" value="Cancelar"></a>
+                    <input type="submit" value="Realizar Apunte">
+                    <div style="clear: both;"></div>
+                </div>
            </form>
-            <%-- 
-            Aqui deberia ir otro form con el que se redirigiera a la principal
-            pero como todavia los servlets no estan implementados queda por hacer
-            
-            --%>
-            <button>Cancelar</button>
-    </div>
+        </div>
     </body>
 </html>

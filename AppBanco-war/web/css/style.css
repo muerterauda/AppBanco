@@ -364,3 +364,9 @@ nav ul li a span {
 	display: none;
 }
 
+#AceptarCancelar input:first-child{
+    
+}
+#AceptarCancelar a{
+    background-color: black;
+}

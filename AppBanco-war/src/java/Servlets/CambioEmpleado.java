@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente;
+package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author GRJuanjo
+ * @author user
  */
-@WebServlet(name="movimientosClienteServlet", urlPatterns = {"/movimientosClienteServlet"})
-public class movimientosClienteServlet extends HttpServlet {
+@WebServlet(name = "CambioEmpleado", urlPatterns = {"/CambioEmpleado"})
+public class CambioEmpleado extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +32,9 @@ public class movimientosClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet movimientosClienteServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet movimientosClienteServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+            request.getSession().invalidate();
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Cliente/loginCliente.jsp");
+            rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
