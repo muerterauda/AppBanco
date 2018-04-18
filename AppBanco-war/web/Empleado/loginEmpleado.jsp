@@ -16,11 +16,15 @@
         <title> Login Empleado </title>
 
         <div class="login" >
-            <form action="../loginEmpleadoServlet" method="post">
+            <form action="loginEmpleadoServlet" method="post">
                 <h1 >Acceso Autorizado</h1>
+                <hr />               
                 <p><span>Numero Empleado: </span><input type="text" name="numeroEmpleado" > </p>
                 <p><span> Contraseña: </span><input type="password" name="password"></h4> </p>
-                <p><input type="submit" title="Entrar"> </p>
+                <hr />
+                <div class="form-button-center">
+                     <p><input type="submit" title="Entrar"> </p>
+                </div>
             </form>
             <% String error = (String) request.getAttribute("error");
                 if (error != null) {%>

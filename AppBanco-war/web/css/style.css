@@ -86,7 +86,14 @@ input[type=button]:active{
 form h1 {
     text-align: center;
 }
-
+form .form-button-left input {
+    float: left;
+    margin-right: 10px;
+}
+form .form-button-center input {
+    margin-left: 200px;
+    position: relative;
+}
 form .form-button-right input {
     float: right;
     margin-left: 10px;
@@ -356,3 +363,4 @@ nav ul li a span {
 	position: absolute; left: 580px; top: 29px;
 	display: none;
 }
+

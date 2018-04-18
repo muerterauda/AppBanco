@@ -56,13 +56,4 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
         return query.getResultList();
     }
     
-    public int getSaldoCuenta(String numeroCuenta){
-        Movimiento result = null;
-        Query q= getEntityManager().createQuery("SELECT m FROM Movimiento m WHERE m.cuenta.numeroCuenta = :p ORDER BY m.fecha DESC");
-        q.setParameter("p", numeroCuenta);
-        result = (Movimiento) q.getResultList().get(0);
-
-        return result == null ? 0 : result.getSaldo();
-    }
-    
 }

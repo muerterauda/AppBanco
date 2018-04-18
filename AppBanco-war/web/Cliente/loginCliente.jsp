@@ -22,9 +22,8 @@
                <p><span>DNI: </span><input type="text" name="dni"></p>
                <p><span>Contraseña: </span><input type="password" name="password"></p>
                <hr />               
-               <div class="form-button-right">
+               <div class="form-button-center">
                    <input type="submit" value="Entrar" />
-                   <div style="clear:both"></div>
                </div>
            </form>
                    <% String error=(String)request.getAttribute("error");
@@ -33,6 +32,7 @@
                              <p><%=error%></p>
                         </div>
                    <%   } %>
+                    <a href="Cambio">Inicio empleado</a>
     </div>
     </body>
 </html>
