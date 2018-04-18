@@ -8,3 +8,4 @@ nbdist/
 /AppBanco2-ejb/nbproject/private/
 *.properties
 *.xml
+*.properties
