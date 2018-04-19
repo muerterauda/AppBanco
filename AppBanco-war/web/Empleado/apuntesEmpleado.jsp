@@ -4,8 +4,21 @@
     Author     : user
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="AppBanco.entity.Movimiento"%>
+<%@page import="AppBanco.entity.Cliente"%>
+<%
+    Cliente cliente = (Cliente) request.getAttribute("cliente");
+    Object numeroCuenta = request.getAttribute("numeroCuenta");
+    SimpleDateFormat dformat = new SimpleDateFormat("dd/MM/YY HH:mm:ss");
+    Object error = request.getAttribute("error");
+    List<Movimiento> movimientos = (List<Movimiento>) request.getAttribute("movimientos");
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,19 +26,21 @@
         <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-      <div id="content-app">
+        <div id="content-app">
             <div id="content">
-                <div id="search">
+                <div id="content-header">
                     <form name="search-mov">
-                        <span>Numero de cuenta</span>
-                        <input type="text" name="concepto" />
+                        <span>Número de cuenta : </span>
+                        <input type="text" style="width: 20em;" name="numeroCuenta" value="<%=numeroCuenta == null ? "" : numeroCuenta%>" />
                         <input type="submit" value="Buscar" />
+                        <a href="principalEmpleado.jsp" class="button float-right">Pantalla principal</a>
                     </form>
-                <button>Pantalla Principal</button>
+
                 </div>
-                <div style="clear: both;"></div>
-                <div id="mov">
-                    <table>
+                
+                <% if (cliente != null) { %>
+                <div id="content-main">
+                    <table class="full-width">
                         <tr>
                             <th>
                                 Concepto
@@ -40,61 +55,64 @@
                                 Saldo después
                             </th>
                         </tr>
+                        <% for (Movimiento mov : movimientos) { %>
                         <tr>
                             <td>
-                                Concepto 1
+                                <%=mov.getConcepto()%>
                             </td>
                             <td>
-                                Concepto 1
+                                <%=dformat.format(mov.getFecha())%>
                             </td>
+                            
+                            <% if (mov.getImporte() >= 0) { %>
                             <td>
-                                Concepto 1
+                                <%=mov.getImporte()%>
                             </td>
+                            <% } else { %>
+                            <td style="color: red;">
+                                <%=mov.getImporte()%>
+                            </td>
+                            <% } %>
+                            
                             <td>
-                                Concepto 1
+                                <%=mov.getSaldo()%>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                Concepto 2
-                            </td>
-                            <td>
-                                Concepto 2
-                            </td>
-                            <td>
-                                Concepto 2
-                            </td>
-                            <td>
-                                Concepto 2
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Concepto 3
-                            </td>
-                            <td>
-                                Concepto 3
-                            </td>
-                            <td>
-                                Concepto 3
-                            </td>
-                            <td>
-                                Concepto 3
-                            </td>
-                        </tr>
+                        <% } %>
                     </table>
                 </div>
-                <div id="informaciontexto">
-                    <div><span><p>Nombre: </br>Tulipano</p></span></div>
-                    <div><span><p>Apellidos: </br>Ortiz Perez</p></span></div>
-                    <div><span><p>DNI: </br>00000000A</p></span></div>
-                    <div><span><p>Telefono: </br>696424242</p></span></div>
-                    <div><span><p>Direccion: </br>Plaza Las Flores</br>Bloque 42, 1ºA</p></span></div>
-                    <button>Realizar Apunte</button>
-                    
+                <div id="content-side">
+                    <dl>
+                        <dt>Saldo : </dt>
+                        <dd><em>500</em> </dd>
+                        <dt>Nombre: </dt>
+                        <dd>Tulipano</dd>
+                        <dt>Apellido : </dt>
+                        <dd>Ortiz Perez</dd>
+                        <dt>DNI : </dt>
+                        <dd>0000000A</dd>
+                        <dt>Teléfono : </dt>
+                        <dd>123456789</dd>
+                        <dt>Dirección : </dt>
+                        <dd>C/ Plaza las folres </dd>
+                    </dl>
+                    <a href="operacionApunte.jsp" class="button">Realizar apunte</a>
                 </div>
+                <div style="clear: both"></div>
+                <% } else { %>
+                <div id="content-main">
+                    
+                    <% if (error == null) { %>
+                    <p>Introduce una cuenta del cliente válida.</p>
+                    <% } else { %>
+                    <div class="error">
+                        <%=error%>
+                    </div>
+                    <% } %>
+                </div>
+                <div style="clear: both"></div>                                    
+                <% } %>
             </div>
         </div>
     </body>
 </html>
-
