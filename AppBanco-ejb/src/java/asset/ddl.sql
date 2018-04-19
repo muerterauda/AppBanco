@@ -29,7 +29,7 @@ CREATE TABLE CLIENTE (
 ) ENGINE=InnoDB;
 
 CREATE TABLE CUENTA(
-    numero    INT NOT NULL,
+    numero    INT NOT NULL AUTO_INCREMENT,
     numero_str VARCHAR(24),
     cliente VARCHAR(9) NOT NULL,
     FOREIGN KEY(cliente) REFERENCES CLIENTE(dni),
