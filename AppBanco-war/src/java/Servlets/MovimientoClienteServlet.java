@@ -48,7 +48,7 @@ public class MovimientoClienteServlet extends HttpServlet {
         Cliente cliente = null;
         Cuenta cuenta = null;
         List<Movimiento> movimientos;
-        int saldo = 0;
+        double saldo = 0;
         HttpSession session = request.getSession();
         
         // Obtengo la sesión del cliente.
@@ -64,7 +64,7 @@ public class MovimientoClienteServlet extends HttpServlet {
             cuenta = cliente.getCuentaList().get(0);
             movimientos = movBD.buscarPorCuentaOrderByFechaDesc(cuenta, ingresos != null, gastos != null, concepto == null ? "" : concepto);
             
-            saldo = cuenBD.getSaldoCuenta(cuenta.getNumeroCuenta());
+            saldo = cuenBD.getSaldoCuenta(cuenta.getNumeroStr());
             
             request.setAttribute("cliente", cliente);
             request.setAttribute("movimientos", movimientos);

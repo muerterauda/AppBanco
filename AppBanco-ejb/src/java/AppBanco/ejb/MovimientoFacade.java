@@ -42,8 +42,25 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
         super(Movimiento.class);
     }
     
+    /**
+     * Busca en la base de datos movimientos de una cuenta filtrados por concepto, 
+     * ingresos y gastsos.
+     * 
+     * Nota : Hace un XOR en gastos e ingresos. Si se pasan los dos a false, se
+     *        devuelven tanto ingresos como gastos.
+     * 
+     * @param cuenta     Cuenta del cliente para buscar los movimientos.
+     * @param ingreso    True si se quieren los ingresos.
+     * @param gastos     True si se quieren los gastos.
+     * @param concepto   Null si no importa o una cadena que contenga el concepto
+     *                   fitlrar.
+     * @author Víctor Manuel Ortiz Guardeño
+     * 
+     * @return Los movimientos filtrados por los parámetros de la función.
+     */
+    
     public List<Movimiento> buscarPorCuentaOrderByFechaDesc(Cuenta cuenta, Boolean ingreso, Boolean gastos, String concepto) {
-        String qq = "SELECT m FROM Movimiento m WHERE m.cuenta.numeroCuenta = :cuenta";
+        String qq = "SELECT m FROM Movimiento m WHERE m.cuenta.numeroStr = :cuenta";
         
         if (concepto != null)
             qq = qq + " AND m.concepto LIKE :concepto";
@@ -58,7 +75,7 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
         
         Query query = getEntityManager()
               .createQuery(qq);
-        query.setParameter("cuenta", cuenta.getNumeroCuenta());
+        query.setParameter("cuenta", cuenta.getNumeroStr());
         
         if (concepto != null)
             query.setParameter("concepto", "%" + concepto + "%");
@@ -78,7 +95,7 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
         }else{
             String concepto;
             Movimiento mov;
-            int saldo= cuF.getSaldoCuenta(cuenta.getNumeroCuenta());
+            double saldo= cuF.getSaldoCuenta(cuenta.getNumeroStr());
             if(saldo-cantidad<0&&operacion.equals("R")){
                throw new RuntimeException("Reintegro mayor que saldo actual");
             }

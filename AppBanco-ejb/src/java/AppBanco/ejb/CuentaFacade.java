@@ -31,10 +31,14 @@ public class CuentaFacade extends AbstractFacade<Cuenta> {
     public CuentaFacade() {
         super(Cuenta.class);
     }
-
-    public int getSaldoCuenta(String numeroCuenta) {
+    /**
+     * Devuelve el saldo de la cuenta
+     * @param numeroCuenta Debe ser numeroStr
+     * @return Devuelve 0 si no existen movimientos en la cuenta.
+     */
+    public double getSaldoCuenta(String numeroCuenta) {
         Movimiento result;
-        Query q = em.createQuery("SELECT m FROM Movimiento m WHERE m.cuenta.numeroCuenta = :p ORDER BY m.fecha DESC");
+        Query q = em.createQuery("SELECT m FROM Movimiento m WHERE m.cuenta.numeroStr = :p ORDER BY m.fecha DESC");
         q.setParameter("p", numeroCuenta);
         List <Movimiento> list= q.getResultList();
         if(list.isEmpty()||list==null){

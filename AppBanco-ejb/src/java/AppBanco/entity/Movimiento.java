@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author user
+ * @author vikou
  */
 @Entity
 @Table(name = "movimiento")
@@ -48,7 +48,7 @@ public class Movimiento implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 200)
     @Column(name = "concepto")
     private String concepto;
     @Basic(optional = false)
@@ -59,15 +59,15 @@ public class Movimiento implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "importe")
-    private int importe;
+    private double importe;
     @Basic(optional = false)
     @NotNull
     @Column(name = "saldo")
-    private int saldo;
+    private double saldo;
     @JoinColumn(name = "operacion", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Operacion operacion;
-    @JoinColumn(name = "cuenta", referencedColumnName = "numeroCuenta")
+    @JoinColumn(name = "cuenta", referencedColumnName = "numero")
     @ManyToOne(optional = false)
     private Cuenta cuenta;
 
@@ -78,7 +78,7 @@ public class Movimiento implements Serializable {
         this.id = id;
     }
 
-    public Movimiento(Integer id, String concepto, Date fecha, int importe, int saldo) {
+    public Movimiento(Integer id, String concepto, Date fecha, double importe, double saldo) {
         this.id = id;
         this.concepto = concepto;
         this.fecha = fecha;
@@ -110,19 +110,19 @@ public class Movimiento implements Serializable {
         this.fecha = fecha;
     }
 
-    public int getImporte() {
+    public double getImporte() {
         return importe;
     }
 
-    public void setImporte(int importe) {
+    public void setImporte(double importe) {
         this.importe = importe;
     }
 
-    public int getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(int saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
