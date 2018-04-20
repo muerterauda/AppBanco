@@ -51,7 +51,6 @@ public class MovimientoEmpleadoServlet extends HttpServlet {
         Cuenta cuenta = null;
         List<Movimiento> movimientos;
         double saldo = 0;
-        /*
         HttpSession session = request.getSession();
         empleado = (Empleado) session.getAttribute("empleado");
         String numeroCuenta=(String)request.getAttribute("cuentaNumero");
@@ -65,18 +64,19 @@ public class MovimientoEmpleadoServlet extends HttpServlet {
                 session.setAttribute("cuenta", cuenta);
                 request.setAttribute("saldo", cuenta);
                 request.setAttribute("movimientos", movimientos);
+                request.setAttribute("cliente", cliente);
                 request.removeAttribute("error");
             }else{
                 session.removeAttribute("cliente");
                 session.removeAttribute("cuenta");
                 request.removeAttribute("saldo");
                 request.removeAttribute("movimientos");
+                request.removeAttribute("cliente");
                 String error="Error: Numero de cuenta no encontrado";
                 request.setAttribute("error", error);
             }
         }
         request.setAttribute("numeroCuenta", numeroCuenta);
-        */
         RequestDispatcher dispacher = getServletContext().getRequestDispatcher("/Empleado/apuntesEmpleado.jsp");
         dispacher.forward(request, response);
     }
