@@ -15,7 +15,7 @@
     </head>
     <body>
         <div id="content-app-medium">
-           <form method="post" action="../operacionApunte" name="datos" accept-charset="UTF-8">
+           <form method="post" action="operacionApunte" name="datos" accept-charset="UTF-8">
                <h2>Nombre, DNI, Numero de cuenta</h2>
                <hr/>
                <p><span>Cantidad: </span><input name="cantidad"></p>
@@ -25,7 +25,7 @@
                </p>
                <hr/>
                 <div class="form-button-right">
-                    <a href=""><input type="button" value="Cancelar"></a>
+                    <a href="../MovimientosEmpleado"><input type="button" value="Cancelar"></a>
                     <input type="submit" value="Realizar Apunte">
                     <div style="clear: both;"></div>
                 </div>

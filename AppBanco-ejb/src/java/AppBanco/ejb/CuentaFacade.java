@@ -48,4 +48,8 @@ public class CuentaFacade extends AbstractFacade<Cuenta> {
         }
         return result == null ? 0 : result.getSaldo();
     }
+
+    public Cuenta findCuentaNumeroStr(String numeroCuenta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

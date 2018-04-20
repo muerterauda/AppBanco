@@ -24,7 +24,7 @@
                 <ul>
                     <li>
                         <h1> Apuntes </h1>
-                        <a href="apuntesEmpleadoServlet" >
+                        <a href="MovimientosEmpleado">
                             <span>Apuntes</span>
                         </a>
                     </li>

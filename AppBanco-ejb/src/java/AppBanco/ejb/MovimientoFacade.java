@@ -89,7 +89,7 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
      * @param cuenta Cuenta a la que se va a realizar el apunte
      * @param cantidad Cantidad referida al apunte, unsigned mayor que 0
      */
-    public Movimiento nuevoApunte(String operacion, Empleado em, Cuenta cuenta, int cantidad) {
+    public Movimiento nuevoApunte(String operacion, Empleado em, Cuenta cuenta, double cantidad) {
         if(em==null||cuenta==null||cantidad<=0||!(operacion.equals("I")||operacion.equals("R"))){
             throw new RuntimeException("Parametros incorrectos");
         }else{

@@ -10,6 +10,7 @@ import AppBanco.ejb.CuentaFacade;
 import AppBanco.ejb.EmpleadoFacade;
 import AppBanco.ejb.MovimientoFacade;
 import AppBanco.ejb.OperacionFacade;
+import AppBanco.entity.Cliente;
 import AppBanco.entity.Cuenta;
 import AppBanco.entity.Empleado;
 import AppBanco.entity.Movimiento;
@@ -54,17 +55,13 @@ public class operacionApunteServlet extends HttpServlet {
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
-        //Empleado em=(Empleado)sesion.getAttribute("empleado");
-        Empleado em= ConectorEmpleado.find(1);
-        
-        //Cuenta cuenta=(Cuenta)sesion.getAttribute("cuenta");
-        
-        Cuenta cuenta= ConectorCuenta.find("AAAA");
+        Empleado em=(Empleado)sesion.getAttribute("empleado");
+        Cuenta cuenta=(Cuenta)sesion.getAttribute("cuenta");
+        Cliente cliente=(Cliente)sesion.getAttribute("cliente");
         Double cantidad=Double.parseDouble(request.getParameter("cantidad"));
         String operacion=request.getParameter("operacion");
-        ConectorMovimiento.nuevoApunte(operacion,em,cuenta,cantidad.intValue()); //cambiar futuro por int
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
-        //RequestDispatcher rd = this.getServletContext().getRequestDispatcher("apuntesEmpleadoServlet");
+        //ConectorMovimiento.nuevoApunte(operacion,em,cuenta,cantidad); //cambiar futuro por int
+        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("MovimientosEmpleado");
         rd.forward(request, response);
     }
 
