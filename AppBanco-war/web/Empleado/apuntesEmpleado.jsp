@@ -13,6 +13,7 @@
     Object numeroCuenta = request.getAttribute("numeroCuenta");
     SimpleDateFormat dformat = new SimpleDateFormat("dd/MM/YY HH:mm:ss");
     Object error = request.getAttribute("error");
+    Object saldo = request.getAttribute("saldo");
     List<Movimiento> movimientos = (List<Movimiento>) request.getAttribute("movimientos");
 %>
 
@@ -84,17 +85,17 @@
                 <div id="content-side">
                     <dl>
                         <dt>Saldo : </dt>
-                        <dd><em>500</em> </dd>
+                        <dd><em><%=saldo%></em> </dd>
                         <dt>Nombre: </dt>
-                        <dd>Tulipano</dd>
+                        <dd><%=cliente.getNombre()%></dd>
                         <dt>Apellido : </dt>
-                        <dd>Ortiz Perez</dd>
+                        <dd><%=cliente.getApellidos()%></dd>
                         <dt>DNI : </dt>
-                        <dd>0000000A</dd>
+                        <dd><%=cliente.getDni()%></dd>
                         <dt>Teléfono : </dt>
-                        <dd>123456789</dd>
+                        <dd><%=cliente.getTelefono()%></dd>
                         <dt>Dirección : </dt>
-                        <dd>C/ Plaza las folres </dd>
+                        <dd><%=cliente.getDireccion()%></dd>
                     </dl>
                     <a href="operacionApunte.jsp" class="button">Realizar apunte</a>
                 </div>
