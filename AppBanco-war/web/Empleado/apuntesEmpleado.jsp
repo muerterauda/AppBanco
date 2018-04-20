@@ -90,8 +90,7 @@
                     <div><span><p>DNI: </br>00000000A</p></span></div>
                     <div><span><p>Telefono: </br>696424242</p></span></div>
                     <div><span><p>Direccion: </br>Plaza Las Flores</br>Bloque 42, 1ºA</p></span></div>
-                    <button>Realizar Apunte</button>
-                    
+                    <a href="Empleado/operacionApunte.jsp"><button>Realizar Apunte</button></a>
                 </div>
             </div>
         </div>
