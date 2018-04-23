@@ -107,7 +107,7 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
                 saldo-=cantidad;
             }
             Operacion op=opF.crearOperacionIngresoOReintegro(concepto, em);
-            mov= new Movimiento(0, concepto, new Date(), saldo, saldo);
+            mov= new Movimiento(0, concepto, new Date(), cantidad*(operacion.equals("I")?1:-1), saldo);
             mov.setOperacion(op);
             mov.setCuenta(cuenta);
             create(mov);

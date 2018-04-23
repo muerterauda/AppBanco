@@ -50,6 +50,15 @@ public class CuentaFacade extends AbstractFacade<Cuenta> {
     }
 
     public Cuenta findCuentaNumeroStr(String numeroCuenta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Cuenta result;
+        Query q = em.createQuery("SELECT c FROM Cuenta c WHERE c.numeroStr= :c");
+        q.setParameter("c", numeroCuenta);
+        List<Cuenta> listC=q.getResultList();
+        if(listC.isEmpty()||listC==null){
+            result=null;
+        }else{
+          result = listC.get(0);   
+        }
+        return result;
     }
 }

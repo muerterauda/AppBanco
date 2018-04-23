@@ -30,11 +30,11 @@
         <div id="content-app">
             <div id="content">
                 <div id="content-header">
-                    <form name="search-mov">
+                    <form action="MovimientosEmpleado" method="post" name="search-mov" accept-charset="UTF-8">
                         <span>Número de cuenta : </span>
                         <input type="text" style="width: 20em;" name="numeroCuenta" value="<%=numeroCuenta == null ? "" : numeroCuenta%>" />
                         <input type="submit" value="Buscar" />
-                        <a href="principalEmpleado.jsp" class="button float-right">Pantalla principal</a>
+                        <a href="VolverPincipalEmpleado" class="button float-right">Pantalla principal</a>
                     </form>
 
                 </div>
@@ -97,7 +97,7 @@
                         <dt>Dirección : </dt>
                         <dd><%=cliente.getDireccion()%></dd>
                     </dl>
-                    <a href="operacionApunte.jsp" class="button">Realizar apunte</a>
+                    <a href="nuevoApunteRedire" class="button">Realizar apunte</a>
                 </div>
                 <div style="clear: both"></div>
                 <% } else { %>

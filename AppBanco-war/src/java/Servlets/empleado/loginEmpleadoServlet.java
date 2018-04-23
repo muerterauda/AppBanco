@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -70,6 +71,10 @@ public class loginEmpleadoServlet extends HttpServlet {
                 RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
                 rd.forward(request, response);
             } else {
+                //Metemos al empleado en la sesion para poder realizar apuntes con el 
+                HttpSession session= request.getSession();
+                session.setAttribute("empleado", empleado);
+                
                 request.removeAttribute("error");
                 RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/principalEmpleado.jsp");
                 rd.forward(request, response);

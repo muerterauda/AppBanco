@@ -1,24 +1,12 @@
-package Servlets.empleado;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Servlets.empleado;
 
-import AppBanco.ejb.CuentaFacade;
-import AppBanco.ejb.EmpleadoFacade;
-import AppBanco.ejb.MovimientoFacade;
-import AppBanco.ejb.OperacionFacade;
-import AppBanco.entity.Cliente;
-import AppBanco.entity.Cuenta;
-import AppBanco.entity.Empleado;
-import AppBanco.entity.Movimiento;
-import AppBanco.entity.Operacion;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,18 +17,11 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author elias
+ * @author user
  */
-@WebServlet(name="operacionApunteServlet",urlPatterns = {"/operacionApunte"})
-public class operacionApunteServlet extends HttpServlet {
+@WebServlet(name = "VolverPincipalEmpleado", urlPatterns = {"/VolverPincipalEmpleado"})
+public class VolverPincipalEmpleado extends HttpServlet {
 
-    @EJB
-    private MovimientoFacade ConectorMovimiento;
-    
-    
-    @EJB
-    private CuentaFacade cuenBD;
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,30 +31,14 @@ public class operacionApunteServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sesion= request.getSession();
-        Empleado em=(Empleado)sesion.getAttribute("empleado");
-        Cuenta cuenta=(Cuenta)sesion.getAttribute("cuenta");
-        Cliente cliente=(Cliente)sesion.getAttribute("cliente");
-        Double cantidad=null;
-        try{
-        cantidad=Double.parseDouble(request.getParameter("cantidad"));
-        String operacion=request.getParameter("operacion");
-        try{
-            ConectorMovimiento.nuevoApunte(operacion,em,cuenta,cantidad);
-            }catch (Exception e){
-                request.setAttribute("error", "Operacion cancelada");
-            }
-        }catch(Exception e){
-            request.setAttribute("error", "Cantidad erronea");
-        }
-        request.setAttribute("cliente", cliente);
-        request.setAttribute("numeroCuenta", cuenta.getNumeroStr());
-        request.setAttribute("movimientos", ConectorMovimiento.buscarPorCuentaOrderByFechaDesc(cuenta, true, true, null));
-        request.setAttribute("saldo", (Double)cuenBD.getSaldoCuenta(cuenta.getNumeroStr()));
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/apuntesEmpleado.jsp");
-        rd.forward(request, response);
+        HttpSession session= request.getSession();
+        session.removeAttribute("cliente");
+        session.removeAttribute("cuenta");
+        session.removeAttribute("ListaMovimientos");
+        RequestDispatcher dispacher = getServletContext().getRequestDispatcher("/Empleado/principalEmpleado.jsp");
+        dispacher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
