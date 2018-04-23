@@ -5,7 +5,6 @@
  */
 package Servlets.empleado;
 
-import Servlets.*;
 import AppBanco.ejb.EmpleadoFacade;
 import AppBanco.entity.Empleado;
 import java.io.IOException;
@@ -41,27 +40,47 @@ public class loginEmpleadoServlet extends HttpServlet {
             throws ServletException, IOException {
         int idEmpleado = -1;
         String password = "";
-        
-        if (request.getParameter("numeroEmpleado")!=null || !request.getParameter("numeroEmpleado").equals("")) {
-            idEmpleado = Integer.parseInt(request.getParameter("numeroEmpleado"));
-            password = request.getParameter("password");
-        }
 
-        Empleado empleado = ConectorEmpleado.find(idEmpleado);
-        if (empleado == null || !empleado.getContrasenya().equals(password)) {
-            if (empleado == null) {
-                request.setAttribute("error", "Error: No existe el usuario");
-            } else {
-                request.setAttribute("error", "Error: La contrase&ntilde;a no coincide");
+        try {
+
+            if (request.getParameter("numeroEmpleado").equals("")) {
+                request.setAttribute("error", "Error: El usuario esta vacio");
+                RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
+                rd.forward(request, response);
             }
+
+            if (request.getParameter("password").equals("")) {
+                request.setAttribute("error", "Error: La contraseña está vacia");
+                RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
+                rd.forward(request, response);
+            }
+
+            if (request.getParameter("numeroEmpleado") != null || !request.getParameter("numeroEmpleado").equals("")) {
+                idEmpleado = Integer.parseInt(request.getParameter("numeroEmpleado"));
+                password = request.getParameter("password");
+            }
+
+            Empleado empleado = ConectorEmpleado.find(idEmpleado);
+            if (empleado == null || !empleado.getContrasenya().equals(password)) {
+                if (empleado == null) {
+                    request.setAttribute("error", "Error: No existe el usuario");
+                } else {
+                    request.setAttribute("error", "Error: La contrase&ntilde;a no coincide");
+                }
+                RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
+                rd.forward(request, response);
+            } else {
+                request.removeAttribute("error");
+                RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/principalEmpleado.jsp");
+                rd.forward(request, response);
+            }
+            
+        } catch (NumberFormatException ex) {
+            request.setAttribute("error", "Error: El usuario no es un numero");
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
             rd.forward(request, response);
-        } else {
-            request.removeAttribute("error");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/principalEmpleado.jsp");
-            rd.forward(request, response);
-        }
 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
