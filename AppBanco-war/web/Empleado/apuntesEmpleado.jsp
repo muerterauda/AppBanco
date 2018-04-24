@@ -34,7 +34,7 @@
                         <span>Número de cuenta : </span>
                         <input type="text" style="width: 20em;" name="numeroCuenta" value="<%=numeroCuenta == null ? "" : numeroCuenta%>" />
                         <input type="submit" value="Buscar" />
-                        <a href="VolverPincipalEmpleado" class="button float-right">Pantalla principal</a>
+                        <a href="VolverPrincipalEmpleado" class="button float-right">Pantalla principal</a>
                     </form>
 
                 </div>

@@ -9,3 +9,5 @@ nbdist/
 *.properties
 *.xml
 *.properties
+/AppBanco-war/nbproject/private/
+/AppBanco-ejb/nbproject/private/

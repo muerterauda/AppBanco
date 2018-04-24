@@ -6,12 +6,15 @@
 package AppBanco.ejb;
 
 import AppBanco.entity.Cuenta;
+import AppBanco.entity.Cliente;
 import AppBanco.entity.Movimiento;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import modelo.datatypes.NumeroCuentaBancaria;
 
 /**
  *
@@ -61,4 +64,16 @@ public class CuentaFacade extends AbstractFacade<Cuenta> {
         }
         return result;
     }
+    
+    public Cuenta crearCuenta(Cliente c){
+        Cuenta cuenta = new Cuenta();
+        cuenta.setCliente(c);
+        cuenta.setMovimientoList(new ArrayList<Movimiento>());
+        int numero =((int) em.createQuery("SELECT MAX(c.numero) FROM Cuenta c").getResultList().get(0))+1;
+        cuenta.setNumeroStr(new NumeroCuentaBancaria(numero).toString());
+        cuenta.setNumero(numero);
+        em.persist(cuenta);
+        return cuenta;
+    }
+    
 }

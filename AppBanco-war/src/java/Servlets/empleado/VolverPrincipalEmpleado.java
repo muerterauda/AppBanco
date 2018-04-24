@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author user
  */
-@WebServlet(name = "VolverPincipalEmpleado", urlPatterns = {"/VolverPincipalEmpleado"})
-public class VolverPincipalEmpleado extends HttpServlet {
+@WebServlet(name = "VolverPrincipalEmpleado", urlPatterns = {"/VolverPrincipalEmpleado"})
+public class VolverPrincipalEmpleado extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

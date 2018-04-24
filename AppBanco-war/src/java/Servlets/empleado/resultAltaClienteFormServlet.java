@@ -3,33 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets;
+package Servlets.empleado;
 
-import AppBanco.ejb.ClienteFacade;
-import AppBanco.ejb.CuentaFacade;
-import AppBanco.entity.Cliente;
-import AppBanco.entity.Cliente_;
-import AppBanco.entity.Cuenta;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author GRJuanjo
  */
-@WebServlet(name = "AltaClienteServlet", urlPatterns = {"/AltaCliente"})
-public class altaClienteServlet extends HttpServlet {
-    @EJB
-    private ClienteFacade clientefa;
-    private CuentaFacade cuentafa;
+@WebServlet(name = "resultAltaClienteFormServlet", urlPatterns = {"/resultAltaClienteFormServlet"})
+public class resultAltaClienteFormServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,40 +32,8 @@ public class altaClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession();
-
-        String nombre = request.getParameter("nombre");
-        String apellidos = request.getParameter("apellidos");
-        String DNI = request.getParameter("DNI");
-        String email = request.getParameter("email");
-        String direccion = request.getParameter("direccion");
-        String telefono = request.getParameter("telefono");
-        RequestDispatcher rd;
-        
-         if (isNullOrWhitespace(nombre) || isNullOrWhitespace(apellidos) || isNullOrWhitespace(DNI) || isNullOrWhitespace(email) || isNullOrWhitespace(direccion) || isNullOrWhitespace(telefono) || clientefa.clienteYaExiste(DNI)) {
-            rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/Empleado/altaClienteForm.jsp");
-            request.setAttribute("nombre", nombre== null ? "" : nombre);
-            request.setAttribute("apellidos", apellidos== null ? "" : apellidos);
-            request.setAttribute("DNI", DNI== null ? "" : DNI);
-            request.setAttribute("email", email== null ? "" : email);
-            request.setAttribute("direccion", direccion== null ? "" : direccion);
-            request.setAttribute("telefono", telefono== null ? "" : telefono);
-            rd.forward(request, response);
-            return;
-        }else {
-             Cliente c = clientefa.insertarCliente(nombre, apellidos, DNI, email, direccion, telefono);
-            session.setAttribute("cliente", c);
-            session.setAttribute("cuenta", clientefa.getCuenta(DNI));
-             rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/resultAltaClienteFormServlet");
-             rd.forward(request, response);
-        }
-        
-        
-    }
-    
-    private static boolean isNullOrWhitespace(String s) {
-        return s == null || s.trim().isEmpty();
+        RequestDispatcher rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/Empleado/resultAltaClienteForm.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

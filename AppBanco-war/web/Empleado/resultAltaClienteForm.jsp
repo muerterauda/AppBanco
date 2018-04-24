@@ -18,8 +18,8 @@
                 El usuario ha sido creado con éxito.
             </p>
             <div class="form-button-right">
-                <a class="button active" href="apuntesEmpleado.jsp">Ir a apuntes</a>
-                <a class="button active" href="principalEmpleado.jsp">Home</a>  
+                <a href="nuevoApunteRedire" class="button active">Ir a apuntes</a>
+                <a href="VolverPrincipalEmpleado" class="button active">Home</a>  
                 <div style="clear: both;"></div>
             </div>
         </div>

@@ -30,7 +30,7 @@
                     </li>
                     <li>
                         <h1> Alta de Usuarios</h1>
-                        <a href="altaClienteServlet">
+                        <a href="AltaCliente">
                             <span>Alta de Usuarios</span>
                         </a>
                     </li>
