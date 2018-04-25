@@ -75,6 +75,22 @@ body {
     border-radius: 5px;
 }
 
+.float-container {
+    position: relative;
+}
+
+.float-item-left {
+    float: left;
+}
+
+.float-item-right {
+    float: right;
+}
+
+.float-clear {
+    clear: both;
+}
+
 header {
     font-family: 'Cheque';
     text-align: center;
@@ -148,8 +164,11 @@ section {
 
 table {
     border-collapse: collapse;
-    margin-left: 2em;
-    margin-right: 2em;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 table tr:first-child {
@@ -157,12 +176,18 @@ table tr:first-child {
 }
 
 td {
-    text-align: center;
+    padding: 5px 10px 5px 10px;
 }
 
 tr {
     border-bottom: solid 1px #117A65;
 }
+
+table tr:first-child {
+    background-color: #424949;
+    color: white;
+}
+
 
 .width-200 {
     width: 200px;

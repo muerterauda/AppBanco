@@ -19,6 +19,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
+        <welcome-file>cliente/login</welcome-file>
         <welcome-file>faces/Cliente/loginCliente.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

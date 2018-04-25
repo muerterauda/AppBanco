@@ -28,43 +28,100 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/style/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div id="content-app">
-            <jsp:include page="header.jsp" flush="true">
-                <jsp:param name="title" value="Movimientos" />
-            </jsp:include>
-            <div id="content">
-                <div id="content-header">
-                    <p>
-                        Hola <%=cliente.getNombre()%>, tienes un saldo de
-                         <%=saldo%>.
-                    </p>
-                </div>
-                <div id="content-main">
+        <main>
+            
+            <aside class="nav-menu-aside100">
+                <header class="background-green">
+                    MENU
+                </header>
+                <nav>
+                    <a href="#" class="nav-active ion-clipboard">Movimientos</a>
+                    <a href="#" class="ion-ios-list-outline">Transferencias</a>
+                    <a href="ayuda" class="ion-help-circled">Ayuda</a>
+                    <a href="cerrarSesion" class="ion-log-out">Cerrar sesión</a>
+                </nav>
+            </aside>
+            
+            <section>
+                <header class="background-black">
+                    MOVIMIENTOS
+                </header>
+
+                <article>
+
+                    <div class="float-container">
+                        <p class="float-item-left">
+                            Hola <b><%=cliente.getNombre()%></b>, tienes un saldo de
+                            <b><%=saldo%> €</b>.
+                        </p>
+
+                        <form name="search-mov" action="#" class="float-item-right">
+                            <input type="text" style="width: 200px;" name="concepto" value="<%=filtrar_concepto%>"/>
+                            <input type="submit" value="Filtrar" />
+
+                            <div class="float-container">
+                                <div class="checkbox-rounded float-item-left">
+                                    <label class="switch">
+                                        <% if (ingresos_checked) { %>
+                                        <input type="checkbox" name="ingresos" value="si" checked/>
+                                        <% } else { %>
+                                        <input type="checkbox" name="ingresos" value="si" />
+                                        <% } %>
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <p>Ingresos</p>
+                                </div>
+
+                                <div class="checkbox-rounded float-item-left">
+                                    <label class="switch">
+                                        <% if (gastos_checked) { %>
+                                        <input type="checkbox" name="gastos" value="si" checked/>
+                                        <% } else { %>
+                                        <input type="checkbox" name="gastos" value="si" />
+                                        <% } %>
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <p>Gastos</p>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="float-clear"></div>
+                    </div>
+                    
                     <table class="full-width">
                         <tr>
+                            <th>
+                                Fecha 
+                            </th>
                             <th>
                                 Concepto
                             </th>
                             <th>
-                                Fecha de comprobante
+                                Importe
                             </th>
                             <th>
-                                Valor
-                            </th>
-                            <th>
-                                Saldo después
+                                Saldo 
                             </th>
                         </tr>
-                        <% for (Movimiento mov : movimientos) { %>
+                        <% if (movimientos.isEmpty()) { 
+                        %>
+                        <tr>
+                            <td colspan="4">
+                                No hay movimientos.
+                            </td>
+                        </tr>
+                        <%
+                        } else {
+                          for (Movimiento mov : movimientos) { %>
                         <tr>
                             <td>
-                                <%=mov.getConcepto()%>
+                                <%=dformat.format(mov.getFecha())%>
                             </td>
                             <td>
-                                <%=dformat.format(mov.getFecha())%>
+                                <%=mov.getConcepto()%>
                             </td>
                             
                             <% if (mov.getImporte() >= 0) { %>
@@ -81,40 +138,14 @@
                                 <%=mov.getSaldo()%>
                             </td>
                         </tr>
-                        <% } %>
+                        <% } } %>
                     </table>
-                </div>
-                <div id="content-side">
-                    <form name="search-mov" action="Movimientos">
-                        <input type="text" name="concepto" value="<%=filtrar_concepto%>"/>
-                        <input type="submit" value="Filtrar" />
-                        <div class="checkbox-rounded">
-                            <label class="switch">
-                                <% if (ingresos_checked) { %>
-                                <input type="checkbox" name="ingresos" value="si" checked/>
-                                <% } else { %>
-                                <input type="checkbox" name="ingresos" value="si" />
-                                <% } %>
-                                <span class="slider round"></span>
-                            </label>
-                            <p>Ingresos</p>
-                        </div>
-                        <div class="checkbox-rounded">
-                            <label class="switch">
-                                <% if (gastos_checked) { %>
-                                <input type="checkbox" name="gastos" value="si" checked/>
-                                <% } else { %>
-                                <input type="checkbox" name="gastos" value="si" />
-                                <% } %>
-                                <span class="slider round"></span>
-                            </label>
-                            <p>Gastos</p>
-                        </div>
-                    </form>
-                </div>
-                <div style="clear: both;"></div>
-            </div>
-        </div>
+                    
+                </article>
+                
+            </section>
+            
+        </main>
     </body>
 </html>
 

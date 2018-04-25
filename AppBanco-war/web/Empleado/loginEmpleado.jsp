@@ -9,29 +9,38 @@
 <html
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/style/main.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
         <title>Login Empleado</title>
     </head>
     <body>
-        <div id="content-app-medium" >
-            <form action="loginEmpleadoServlet" method="post" name="datos" accept-charset="UTF-8">
-                <h1 >Acceso Autorizado</h1>
-                <hr />               
-                <p><span>Numero Empleado: </span><input type="text" name="numeroEmpleado" > </p>
-                <p><span> Contraseña: </span><input type="password" name="password"></h4> </p>
-                <hr />
-                <div class="form-button-center">
-                     <p><input type="submit" title="Entrar"> </p>
-                </div>
-            </form>
-            <% String error = (String) request.getAttribute("error");
-                if (error != null) {%>
+        
+        <main id="wallpaper" class="fondo-banco-noche">
+            <aside class="nav-menu-login background-white opacity-80">
+                <header class="background-green">
+                    BANCO
+                </header>
+                <form method="post" action="empleado/login" name="datos">
+                    <p>
+                        <span>Número de empleado :</span>
+                        <input type="text" name="numeroEmpleado">
+                    </p>
+                    <p>
+                        <span>Contraseña :</span>
+                        <input type="password" name="password">
+                    </p>
+                    <input type="submit" value="Log in" />
+                    <a href="../cliente/login" class="button">Cliente</a> 
+                    <% String error = (String) request.getAttribute("error");
+                        if (error != null) {%>
                     <div class="error"> 
                         <p><%=error%></p>
                     </div>
-            <%   }%>
-            <a href="CambioEmpleado">Inicio cliente</a>
-        </div>
+                    <%   }%>
+                </form>
+            </aside>
+
+        </main>
+        
     </body>
 </html>

@@ -9,7 +9,7 @@
 <html
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="${pageContext.request.contextPath}/style/estilo_banco.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/style/main.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
         <title>Login Cliente</title>
     </head>
@@ -20,9 +20,9 @@
                 <header class="background-green">
                     BANCO
                 </header>
-                <form method="post" action="loginClienteServlet" name="datos">
+                <form method="post" action="#" name="datos">
                     <p>
-                        <span>Nombre :</span>
+                        <span>DNI :</span>
                         <input type="text" name="dni">
                     </p>
                     <p>
@@ -30,7 +30,7 @@
                         <input type="password" name="password">
                     </p>
                     <input type="submit" value="Log in" />
-                    <a href="Cambio" class="button">Empleado</a> 
+                    <a href="/AppBanco-war/empleado/login" class="button">Empleado</a> 
                     <% String error = (String) request.getAttribute("error");
                         if (error != null) {%>
                     <div class="error"> 

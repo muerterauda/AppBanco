@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author vikou
  */
-@WebServlet(name="MovimientoClienteServlet", urlPatterns = {"/Movimientos"})
+@WebServlet(name="MovimientoClienteServlet", urlPatterns = {"/cliente/movimientos"})
 public class MovimientoClienteServlet extends HttpServlet {
 
     @EJB
