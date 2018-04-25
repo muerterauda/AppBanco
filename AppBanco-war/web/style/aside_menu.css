@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23-abr-2018, 11:19:46
+    Author     : Víctor Manuel
+*/
+
+.nav-menu-aside100 {
+    border-right: solid 1px #EAEDED;
+}
+
+.nav-menu-aside100 nav a, .nav-menu-aside100 nav div {
+    color: black;
+    text-decoration: none;
+    display: block;
+    border-bottom: solid 1px #EAEDED;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 2em;
+}
+
+.nav-menu-aside100 nav a:before {
+    font-size: 20pt;
+    padding-right: 20px;
+}
+
+.nav-menu-aside100 nav a:active {
+    background-color: #EAEDED;
+}
+
+.nav-menu-aside100 nav a.nav-active {
+    font-weight: bolder;
+    color: #117A65;
+}
+
+.nav-menu-aside100 header {
+    height: 100px;
+    line-height: 100px;
+}

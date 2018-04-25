@@ -1,0 +1,188 @@
+/* 
+    Created on : 23-abr-2018, 9:46:49
+    Author     : Víctor Manuel Ortiz Guardeño
+*/
+
+@import "aside_menu.css";
+@import "login_style.css";
+@import "ionicons.css";
+@import "slider_style.css";
+
+@font-face {
+    font-family: 'Cabo Slab';
+    src: url('fonts/Cabo Slab Regular.otf');
+}
+
+@font-face {
+    font-family: 'Cheque';
+    src: url('fonts/Cheque-Regular.otf');
+}
+
+aside, section {
+    position: absolute;
+}
+
+aside {
+    width: 300px;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+
+article {
+    padding: 1em;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.background-white {
+    background-color: white;
+}
+
+.background-black {
+    background-color: #424949;
+    color: white;
+}
+
+.background-green {
+    background-color: #117A65;
+    color: white;
+}
+
+.button {
+    text-decoration: none;
+    color: white;
+    border-radius: 3px;
+    padding: 0.5em 1em 0.5em 1em;
+    display: inline-block;
+}
+
+body {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+.color-red {
+    color: #CD6155;
+}
+
+.error {
+    background-color: #CD6155;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+header {
+    font-family: 'Cheque';
+    text-align: center;
+    font-size: 2em;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin-left: 1em;
+    color: #117A65;
+}
+
+input[type="text"], input[type="number"], input[type="email"],
+input[type="password"]
+{
+    padding: 0.3em 0.5em 0.3em 0.5em;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus,
+input[type="password"]:focus
+{
+    padding: 0.3em 0.5em 0.3em 0.5em;
+}
+
+input[type="submit"], input[type="button"] {
+    padding: 0.7em 1.2em 0.7em 1.2em;        
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    display: inline-block;
+    box-shadow: #424949 0px 0px 10px inset;
+}
+
+input[type="submit"] {
+    background-color: #117A65;
+}
+
+input[type="button"], .button {
+    background-color: #424949;
+}
+
+input[type="button"]:active, .button:active {
+    background-color: #117A65;
+}
+
+input[type="submit"]:active {
+    background-color: #424949;
+}
+
+main section header {
+    height: 100px;
+    line-height: 100px;
+}
+
+.opacity-80 {
+    opacity: 0.9;
+}
+
+p {
+    text-align: justify;
+    font-weight: 300;
+}
+
+section {
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    left: 300px;
+}
+
+
+table {
+    border-collapse: collapse;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+table tr:first-child {
+    border-top: solid 1px #117A65;
+}
+
+td {
+    text-align: center;
+}
+
+tr {
+    border-bottom: solid 1px #117A65;
+}
+
+.width-200 {
+    width: 200px;
+}
+
+#wallpaper {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.fondo-banco-dia {
+    background-image: url('../images/prueba2.jpg');    
+}
+
+.fondo-banco-noche {
+    background-image: url('../images/prueba1.jpg');    
+}

@@ -1,0 +1,25 @@
+/* 
+    Created on : 23-abr-2018, 13:56:24
+    Author     : Víctor Manuel Ortiz Guardeño
+*/
+
+.nav-menu-login header{
+    height: 100px;
+    line-height: 100px;
+    box-shadow: #424949 0px 0px  20px inset;
+}
+
+.nav-menu-login span {
+    display: block;
+}
+
+.nav-menu-login form {
+    margin-left: 1em;
+    margin-right: 1em;
+    position: relative;
+}
+
+.nav-menu-login input[type="text"],
+.nav-menu-login input[type="password"]{
+    width: 200px;
+}
