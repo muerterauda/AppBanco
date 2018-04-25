@@ -38,6 +38,7 @@ public class traspasoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Aqui simplemente redirigimos a transferencias.jsp
+       
         HttpSession session=request.getSession();
         Cuenta cuenta=(Cuenta) session.getAttribute("cuenta");
         request.setAttribute("saldo", cf.getSaldoCuenta(cuenta.getNumeroStr()));

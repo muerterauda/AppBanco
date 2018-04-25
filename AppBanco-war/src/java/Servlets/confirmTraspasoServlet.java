@@ -56,41 +56,64 @@ public class confirmTraspasoServlet extends HttpServlet {
         
         if(request.getParameter("cuentaDest")==null || request.getParameter("cuentaDest").equals("")){
             request.setAttribute("error", "El numero de cuenta es null o está vacio");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/transferencias.jsp");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
             rd.forward(request, response);
         }
-        if(request.getParameter("cantidad")==null || Double.parseDouble(request.getParameter("cantidad"))<0){
-            request.setAttribute("error", "La cantidad es null o menor que cero");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/transferencias.jsp");
-            rd.forward(request, response);
-        }
-        HttpSession session=request.getSession();
         
-        double cantidad=Double.parseDouble(request.getParameter("cantidad"));
+        if(request.getParameter("cantidad")==null || request.getParameter("cantidad").equals("") ){
+            request.setAttribute("error", "La cantidad es null o esta vacia");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
+            rd.forward(request, response);
+        }
+        
+        double cantidad=0;
+        
+        try{
+            
+            cantidad=Double.parseDouble(request.getParameter("cantidad"));
+            
+        }catch(NumberFormatException ex){
+            request.setAttribute("error", "La cantidad no es un numero");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
+            rd.forward(request, response);
+        }
+        
+        if(cantidad<0){
+            request.setAttribute("error", "La cantidad es menor que cero");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
+            rd.forward(request, response);
+        }
+        
+        HttpSession session=request.getSession();
         Cuenta cuentaDestino= cuentaf.findCuentaNumeroStr(request.getParameter("cuentaDest"));
         Cuenta cuentaOrigen= (Cuenta) session.getAttribute("cuenta");
+        double saldoOrigen= cuentaf.getSaldoCuenta(cuentaOrigen.getNumeroStr());
         
         if(cuentaDestino==null){
             request.setAttribute("error", "La cuenta introducida no es valida");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/transferencias.jsp");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
             rd.forward(request, response);
         }
         
-        //Primera parte de la transferencia
-        double saldoOrigen= cuentaf.getSaldoCuenta(cuentaOrigen.getNumeroStr());
-        Operacion operacionResta= operacionf.crearOperacionIngresoOReintegro("TRASPASO", null);
-        Movimiento movResta=new Movimiento(0, "Traspaso a "+cuentaDestino.getNumeroStr(), new Date(), cantidad*-1, saldoOrigen-cantidad );
-        movResta.setOperacion(operacionResta);
-        movResta.setCuenta(cuentaOrigen);
-        movimientof.create(movResta);
+        if(saldoOrigen-cantidad<0){
+            request.setAttribute("error", "La cantidad introducida es mayor al saldo que tienes");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
+            rd.forward(request, response);
+        }
         
-        //Segunda Parte de la transferencia, ingreso en la cuenta destino que ya hemos comprobado que existe 
-        double saldoDestino=cuentaf.getSaldoCuenta(cuentaDestino.getNumeroStr());
-        Operacion operacionSuma=operacionf.crearOperacionIngresoOReintegro("TRASPASO", null);
-        Movimiento movSuma= new Movimiento(0, "Traspaso de "+cuentaOrigen.getNumeroStr(), new Date(), cantidad, saldoDestino+cantidad);
-        movSuma.setOperacion(operacionSuma);
-        movSuma.setCuenta(cuentaDestino);
-        movimientof.create(movSuma);
+        if(cuentaDestino.getNumeroStr().equals(cuentaOrigen.getNumeroStr())){
+            request.setAttribute("error", "La cuenta origen es la misma que la destino");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
+            rd.forward(request, response);
+        }
+        
+        if(cantidad==0){
+            request.setAttribute("error", "La cantidad es cero");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
+            rd.forward(request, response);
+        }
+        
+        movimientof.realizarTransferencia(cuentaDestino, cantidad, saldoOrigen, cuentaOrigen);
 
         
         //tengo que comprobar que no me quedo sin dinero
@@ -99,6 +122,8 @@ public class confirmTraspasoServlet extends HttpServlet {
         dispacher.forward(request, response);
         
     }
+
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
