@@ -122,7 +122,7 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
 
     public void realizarTransferencia(Cuenta cuentaDestino, double cantidad, double saldoOrigen, Cuenta cuentaOrigen) {
         //Primera parte de la transferencia
-        if (cantidad < saldoOrigen && cantidad > 0) {
+        if (cantidad <= saldoOrigen && cantidad > 0) {
             Operacion operacionResta = opF.crearOperacionIngresoOReintegro("TRASPASO", null);
             Movimiento movResta = new Movimiento(0, "Traspaso a " + cuentaDestino.getNumeroStr(), new Date(), cantidad * -1, saldoOrigen - cantidad);
             movResta.setOperacion(operacionResta);
