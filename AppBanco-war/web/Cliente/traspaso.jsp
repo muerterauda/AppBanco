@@ -24,26 +24,24 @@
             <jsp:include page="header.jsp" flush="true">
                 <jsp:param name="title" value="Movimientos" />
             </jsp:include>
-            <h1>Transferencias</h1>
-            <div class="datosTransferencia" >
-                <h2>Bienvenido: <%= cliente.getNombre() %> <%= cliente.getApellidos() %></h2>
-                <h2>Saldo:<%= request.getAttribute("saldo") %> </h2>
-            </div>
-            
-            <form action="confirmTraspasoServlet">    
-                <h3>Cuenta destino: </h3> 
-                <input type="text" name="cuentaDest" >
-                <h3>Cantidad: </h3>
-                <input type="text" name="cantidad">
-                <input type="submit">
-                
-            </form>
-                <% String error=(String)request.getAttribute("error");
+            <div id="content">
+                <h3>Bienvenido: <%= cliente.getNombre() %> <%= cliente.getApellidos() %></h3>
+                <h3>Saldo: <%= request.getAttribute("saldo") %> </h3>
+            <form name="confirmTraspaso" action="confirmTraspasoServlet" >
+                <p><span> Cuenta destino: </span><input type="text" name ="cuentaDest"></p>
+                <p><span> Cantidad:  </span><input type="text" name ="cantidad"</p>
+                <hr />
+                 <% String error=(String)request.getAttribute("error");
                       if(error!=null){ %>
                          <div class="error"> 
                              <p><%=error%></p>
                         </div>
                    <%   } %>    
+                <div class="form-button-center">
+                    <input type="submit" style="margin-left: 450px;" value="Enviar">
+                    <div style="clear: both;"></div>
+                </div>
+            </form>
         </div>
     </body>
 </html>

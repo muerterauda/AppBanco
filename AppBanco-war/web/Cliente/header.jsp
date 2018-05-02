@@ -9,7 +9,7 @@
                     <div id="navegador">
                     <ul>
                         <li><a href="Movimientos">Movimientos</a></li>
-                        <li><a href="traspasoServlet" >Transpasos</a></li>
+                        <li><a href="traspasoServlet" >Traspasos</a></li>
                         <li><a href="ayudaServlet" >Ayuda</a></li>
                         <li><a href="Cambio?cambio=1">Cerrar sesión</a></li>
                     </ul>

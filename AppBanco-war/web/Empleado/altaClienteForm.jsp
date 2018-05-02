@@ -21,7 +21,6 @@
         <title>Alta de cliente</title>
     </head>
     <body>
-
         <div id="content-app-medium">
             <form name="altacliente" action="AltaCliente" >
                 <h1>Nuevo cliente</h1>
