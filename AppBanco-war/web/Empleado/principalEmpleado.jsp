@@ -36,7 +36,7 @@
                     </li>
                     <li>
                         <h1> Salir </h1>
-                        <a href="cerrarSesionEmpleado">
+                        <a href="Cambio?cambio=0">
                             <span>Salir</span>
                         </a>
                     </li>

@@ -11,7 +11,7 @@
                         <li><a href="Movimientos">Movimientos</a></li>
                         <li><a href="traspasoServlet" >Transpasos</a></li>
                         <li><a href="ayudaServlet" >Ayuda</a></li>
-                        <li><a href="cerrarSesionServlet">Cerrar sesión</a></li>
+                        <li><a href="Cambio?cambio=1">Cerrar sesión</a></li>
                     </ul>
                         <div style="clear:both"></div>
                     </div>

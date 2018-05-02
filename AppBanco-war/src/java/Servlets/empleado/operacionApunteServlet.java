@@ -7,17 +7,11 @@ package Servlets.empleado;
  */
 
 import AppBanco.ejb.CuentaFacade;
-import AppBanco.ejb.EmpleadoFacade;
 import AppBanco.ejb.MovimientoFacade;
-import AppBanco.ejb.OperacionFacade;
 import AppBanco.entity.Cliente;
 import AppBanco.entity.Cuenta;
 import AppBanco.entity.Empleado;
-import AppBanco.entity.Movimiento;
-import AppBanco.entity.Operacion;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -63,10 +57,15 @@ public class operacionApunteServlet extends HttpServlet {
         try{
             ConectorMovimiento.nuevoApunte(operacion,em,cuenta,cantidad);
             }catch (Exception e){
-                request.setAttribute("error", "Operacion cancelada");
+                request.setAttribute("error", "Cantidad erronea");
             }
         }catch(Exception e){
             request.setAttribute("error", "Cantidad erronea");
+        }
+        if(request.getAttribute("error")!=null){
+            request.setAttribute("cliente", cliente);
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/operacionApunte.jsp");
+            rd.forward(request, response);
         }
         request.setAttribute("cliente", cliente);
         request.setAttribute("numeroCuenta", cuenta.getNumeroStr());
