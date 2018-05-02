@@ -31,7 +31,7 @@
                         <p><%=error%></p>
                     </div>
             <%   }%>
-            <a href="CambioEmpleado">Inicio cliente</a>
+            <a href="Cambio?cambio=1">Inicio cliente</a>
         </div>
     </body>
 </html>

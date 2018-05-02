@@ -32,8 +32,14 @@ public class Cambio extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {    
+            String p=request.getParameter("cambio");
+            RequestDispatcher rd=null;
+            if(p.equals("0")){
+               rd= this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");  
+            }else{
+               rd= this.getServletContext().getRequestDispatcher("/Cliente/loginCliente.jsp");
+            }
             request.getSession().invalidate();
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/loginEmpleado.jsp");
             rd.forward(request, response);
     }
 
