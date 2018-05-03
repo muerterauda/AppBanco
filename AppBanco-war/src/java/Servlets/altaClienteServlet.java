@@ -8,10 +8,10 @@ package Servlets;
 import AppBanco.ejb.ClienteFacade;
 import AppBanco.ejb.CuentaFacade;
 import AppBanco.entity.Cliente;
-import AppBanco.entity.Cliente_;
 import AppBanco.entity.Cuenta;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Pattern;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
 public class altaClienteServlet extends HttpServlet {
     @EJB
     private ClienteFacade clientefa;
+    @EJB
     private CuentaFacade cuentafa;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,7 +53,7 @@ public class altaClienteServlet extends HttpServlet {
         String telefono = request.getParameter("telefono");
         RequestDispatcher rd;
         
-         if (isNullOrWhitespace(nombre) || isNullOrWhitespace(apellidos) || isNullOrWhitespace(DNI) || isNullOrWhitespace(email) || isNullOrWhitespace(direccion) || isNullOrWhitespace(telefono) || clientefa.clienteYaExiste(DNI)) {
+         if (!dniCorrecto(DNI) ||isNullOrWhitespace(nombre) || isNullOrWhitespace(apellidos) || isNullOrWhitespace(DNI) || isNullOrWhitespace(email) || isNullOrWhitespace(direccion) || isNullOrWhitespace(telefono) || clientefa.clienteYaExiste(DNI)) {
             rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/Empleado/altaClienteForm.jsp");
             request.setAttribute("nombre", nombre== null ? "" : nombre);
             request.setAttribute("apellidos", apellidos== null ? "" : apellidos);
@@ -75,6 +76,17 @@ public class altaClienteServlet extends HttpServlet {
     
     private static boolean isNullOrWhitespace(String s) {
         return s == null || s.trim().isEmpty();
+    }
+    
+    private static boolean dniCorrecto(String s){
+        if(s!=null){
+            if(Pattern.matches("[0-9]{8}[A-Z]", s)){
+              return true;
+            }else{
+              return false;
+            }
+        }
+        return false;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

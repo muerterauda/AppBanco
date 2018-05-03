@@ -11,3 +11,6 @@ nbdist/
 *.properties
 /AppBanco-war/nbproject/private/
 /AppBanco-ejb/nbproject/private/
+/GuerreroRuiz/nbproject/private/
+/GuerreroRuiz/GuerreroRuiz-war/nbproject/private/
+/GuerreroRuiz/GuerreroRuiz-ejb/nbproject/private/
