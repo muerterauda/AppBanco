@@ -30,7 +30,7 @@
                     </li>
                     <li>
                         <h1> Alta de Usuarios</h1>
-                        <a href="AltaCliente">
+                        <a href="AltaCliente?error=0">
                             <span>Alta de Usuarios</span>
                         </a>
                     </li>

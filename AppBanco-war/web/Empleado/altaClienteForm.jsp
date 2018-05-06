@@ -23,7 +23,7 @@
     </head>
     <body>
         <div id="content-app-medium">
-            <form name="altacliente" action="AltaCliente" >
+            <form name="altacliente" action="AltaCliente" method="post">
                 <h1>Nuevo cliente</h1>
                 <hr />
                 <p><span> Nombre: </span><input type="text" name ="nombre"  value = <%=nombre%>></p>
