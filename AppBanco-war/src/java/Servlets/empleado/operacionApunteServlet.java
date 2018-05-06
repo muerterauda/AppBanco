@@ -59,9 +59,11 @@ public class operacionApunteServlet extends HttpServlet {
             request.setAttribute("error", "Cantidad erronea");
         }
         if(request.getAttribute("error")!=null){
+            request.setAttribute("cliente", cliente);
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Empleado/operacionApunte.jsp");
             rd.forward(request, response);
         }
+        request.setAttribute("cliente", cliente);
         request.setAttribute("numeroCuenta", cuenta.getNumeroStr());
         request.setAttribute("movimientos", ConectorMovimiento.buscarPorCuentaOrderByFechaDesc(cuenta, true, true, null));
         request.setAttribute("saldo", (Double)cuenBD.getSaldoCuenta(cuenta.getNumeroStr()));

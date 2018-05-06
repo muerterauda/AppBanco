@@ -36,7 +36,7 @@
                     </div>
                    <%   }%>
                 <div class="form-button-right">
-                    <a href="MovimientosEmpleado"><input type="button" value="Cancelar"></a>
+                    <a href="MovimientosEmpleado?numeroCuenta=<%=((Cuenta)request.getSession().getAttribute("cuenta")).getNumeroStr()%>"><input type="button" value="Cancelar"></a>
                     <input type="submit" value="Realizar Apunte">
                 </div>
                <div style="clear: both;"></div>

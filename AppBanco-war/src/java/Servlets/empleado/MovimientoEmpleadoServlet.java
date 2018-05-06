@@ -46,23 +46,13 @@ public class MovimientoEmpleadoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         HttpSession session = request.getSession();
         Cliente cliente = (Cliente)session.getAttribute("cliente");
         Cuenta cuenta = (Cuenta)session.getAttribute("cuenta");
         List<Movimiento> movimientos=null;
         Empleado empleado = (Empleado) session.getAttribute("empleado");
         double saldo = 0;
-        String numeroCuenta=null;
-        if(cliente!=null&&cuenta!=null){
-            numeroCuenta=cuenta.getNumeroStr();
-            movimientos=movBD.buscarPorCuentaOrderByFechaDesc(cuenta, true, true, null);
-            saldo= cuenBD.getSaldoCuenta(cuenta.getNumeroStr());
-            request.setAttribute("saldo", saldo);
-            request.setAttribute("movimientos", movimientos);
-            request.setAttribute("cliente", cliente);
-        }else{
-         numeroCuenta=(String)request.getParameter("numeroCuenta");
+        String numeroCuenta= (String)request.getParameter("numeroCuenta");
          if(numeroCuenta!=null&&!numeroCuenta.equals("")){
             cuenta= cuenBD.findCuentaNumeroStr(numeroCuenta);
             if(cuenta!=null){
@@ -87,7 +77,7 @@ public class MovimientoEmpleadoServlet extends HttpServlet {
                 request.setAttribute("error", error);
             }
         }
-        }
+        //}
         request.setAttribute("numeroCuenta", numeroCuenta);
         RequestDispatcher dispacher = getServletContext().getRequestDispatcher("/Empleado/apuntesEmpleado.jsp");
         dispacher.forward(request, response);

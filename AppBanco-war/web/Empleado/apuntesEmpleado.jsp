@@ -9,7 +9,7 @@
 <%@page import="AppBanco.entity.Movimiento"%>
 <%@page import="AppBanco.entity.Cliente"%>
 <%
-    Cliente cliente =(Cliente) request.getSession().getAttribute("cliente");
+    Cliente cliente =(Cliente) request.getAttribute("cliente");
     Object numeroCuenta = request.getAttribute("numeroCuenta");
     SimpleDateFormat dformat = new SimpleDateFormat("dd/MM/YY HH:mm:ss");
     Object error = request.getAttribute("error");
