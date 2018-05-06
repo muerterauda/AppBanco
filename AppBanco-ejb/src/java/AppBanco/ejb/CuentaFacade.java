@@ -6,9 +6,15 @@
 package AppBanco.ejb;
 
 import AppBanco.entity.Cuenta;
+import AppBanco.entity.Cliente;
+import AppBanco.entity.Movimiento;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import modelo.datatypes.NumeroCuentaBancaria;
 
 /**
  *
@@ -27,6 +33,47 @@ public class CuentaFacade extends AbstractFacade<Cuenta> {
 
     public CuentaFacade() {
         super(Cuenta.class);
+    }
+    /**
+     * Devuelve el saldo de la cuenta
+     * @param numeroCuenta Debe ser numeroStr
+     * @return Devuelve 0 si no existen movimientos en la cuenta.
+     */
+    public double getSaldoCuenta(String numeroCuenta) {
+        Movimiento result;
+        Query q = em.createQuery("SELECT m FROM Movimiento m WHERE m.cuenta.numeroStr = :p ORDER BY m.fecha DESC");
+        q.setParameter("p", numeroCuenta);
+        List <Movimiento> list= q.getResultList();
+        if(list.isEmpty()||list==null){
+            result=null;
+        }else{
+          result = list.get(0);   
+        }
+        return result == null ? 0 : result.getSaldo();
+    }
+
+    public Cuenta findCuentaNumeroStr(String numeroCuenta) {
+        Cuenta result;
+        Query q = em.createQuery("SELECT c FROM Cuenta c WHERE c.numeroStr= :c");
+        q.setParameter("c", numeroCuenta);
+        List<Cuenta> listC=q.getResultList();
+        if(listC.isEmpty()||listC==null){
+            result=null;
+        }else{
+          result = listC.get(0);   
+        }
+        return result;
+    }
+    
+    public Cuenta crearCuenta(Cliente c){
+        Cuenta cuenta = new Cuenta();
+        cuenta.setCliente(c);
+        cuenta.setMovimientoList(new ArrayList<Movimiento>());
+        int numero =((int) em.createQuery("SELECT MAX(c.numero) FROM Cuenta c").getResultList().get(0))+1;
+        cuenta.setNumeroStr(new NumeroCuentaBancaria(numero).toString());
+        cuenta.setNumero(numero);
+        em.persist(cuenta);
+        return cuenta;
     }
     
 }

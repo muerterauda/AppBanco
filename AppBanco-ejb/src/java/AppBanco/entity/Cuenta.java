@@ -25,23 +25,26 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author user
+ * @author vikou
  */
 @Entity
 @Table(name = "cuenta")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Cuenta.findAll", query = "SELECT c FROM Cuenta c")
-    , @NamedQuery(name = "Cuenta.findByNumeroCuenta", query = "SELECT c FROM Cuenta c WHERE c.numeroCuenta = :numeroCuenta")})
+    , @NamedQuery(name = "Cuenta.findByNumero", query = "SELECT c FROM Cuenta c WHERE c.numero = :numero")
+    , @NamedQuery(name = "Cuenta.findByNumeroStr", query = "SELECT c FROM Cuenta c WHERE c.numeroStr = :numeroStr")})
 public class Cuenta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 24)
-    @Column(name = "numeroCuenta")
-    private String numeroCuenta;
+    @Column(name = "numero")
+    private Integer numero;
+    @Size(max = 24)
+    @Column(name = "numero_str")
+    private String numeroStr;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuenta")
     private List<Movimiento> movimientoList;
     @JoinColumn(name = "cliente", referencedColumnName = "dni")
@@ -51,16 +54,24 @@ public class Cuenta implements Serializable {
     public Cuenta() {
     }
 
-    public Cuenta(String numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
+    public Cuenta(Integer numero) {
+        this.numero = numero;
     }
 
-    public String getNumeroCuenta() {
-        return numeroCuenta;
+    public Integer getNumero() {
+        return numero;
     }
 
-    public void setNumeroCuenta(String numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getNumeroStr() {
+        return numeroStr;
+    }
+
+    public void setNumeroStr(String numeroStr) {
+        this.numeroStr = numeroStr;
     }
 
     @XmlTransient
@@ -83,7 +94,7 @@ public class Cuenta implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (numeroCuenta != null ? numeroCuenta.hashCode() : 0);
+        hash += (numero != null ? numero.hashCode() : 0);
         return hash;
     }
 
@@ -94,7 +105,7 @@ public class Cuenta implements Serializable {
             return false;
         }
         Cuenta other = (Cuenta) object;
-        if ((this.numeroCuenta == null && other.numeroCuenta != null) || (this.numeroCuenta != null && !this.numeroCuenta.equals(other.numeroCuenta))) {
+        if ((this.numero == null && other.numero != null) || (this.numero != null && !this.numero.equals(other.numero))) {
             return false;
         }
         return true;
@@ -102,7 +113,7 @@ public class Cuenta implements Serializable {
 
     @Override
     public String toString() {
-        return "AppBanco.entity.Cuenta[ numeroCuenta=" + numeroCuenta + " ]";
+        return "AppBanco.entity.Cuenta[ numero=" + numero + " ]";
     }
     
 }

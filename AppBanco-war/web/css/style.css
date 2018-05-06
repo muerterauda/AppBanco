@@ -23,20 +23,21 @@ hr {
 }
 
 .button{
-    float: right;
+    float: right;    
     margin-left: 10px;
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
     text-decoration: none;
     color: white;
+    font-size: 15px;
     border-style: solid;
     border-color: #1B2631;
     border-width: 1px;
     border-radius: 3px;
     background-color: #1B2631;
-    padding: 8px 15px 8px 15px;
+    padding: 7px 13px 7px 13px;
+}
+
+.button:active {
+    background-color: black;
 }
 
 .active{
@@ -86,7 +87,14 @@ input[type=button]:active{
 form h1 {
     text-align: center;
 }
-
+form .form-button-left input {
+    float: left;
+    margin-right: 10px;
+}
+form .form-button-center input {
+    margin-left: 200px;
+    position: relative;
+}
 form .form-button-right input {
     float: right;
     margin-left: 10px;
@@ -132,26 +140,31 @@ form .form-button-right input {
 }
 
 #content {
-    width: 100%;
+    width : 920px;
     padding-left: 20px;
     padding-right: 20px;
 }
 #content-header{
+    padding: 10px 5px 10px 5px;
 }
 #content-main {
-    width: 640px;
+    width: 660px;
+    position: relative;
+    display: inline-block;
     float: left;
-}
-
-#content-total{
-    width: 960px;
 }
 
 #content-side {
-    width: 278px;
-    float: left;
-    padding: 0px 20px 0px 20px;
+    float: right;
+    width: 200px;
     position: relative;
+}
+
+.error {
+    background: #fef1ec;
+    color: black;
+    font-size: large;
+    text-align: center;
 }
 
 /* TABLAS */
@@ -262,6 +275,7 @@ tr:nth-child(odd) {
 }
 #navegador li:last-child {
   float: right;
+  margin-right: -4px;
 }
 #navegador ul {
   list-style: none;
@@ -304,7 +318,6 @@ tr:nth-child(odd) {
 }
 .login button{
     margin-left: 200px;
-    size: 200;
 }
 
 
@@ -348,4 +361,18 @@ nav ul li a span {
 	font: 50px "Dosis", sans-serif; text-transform: uppercase; 
 	position: absolute; left: 580px; top: 29px;
 	display: none;
+}
+
+dl {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+dt {
+    font-weight: 500;
+}
+
+em {
+    color: #1B4F72;
+    font-weight: 600;
 }

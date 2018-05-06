@@ -5,21 +5,35 @@
  */
 package Servlets;
 
+import AppBanco.ejb.ClienteFacade;
+import AppBanco.ejb.CuentaFacade;
+import AppBanco.ejb.MovimientoFacade;
+import AppBanco.entity.Cliente;
+import AppBanco.entity.Cuenta;
+import AppBanco.entity.Movimiento;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author elias
+ * @author vikou
  */
-@WebServlet(name = "altaClienteServlet", urlPatterns = {"/altaClienteServlet"})
-public class altaClienteServlet extends HttpServlet {
+@WebServlet(name="MovimientoClienteServlet", urlPatterns = {"/Movimientos"})
+public class MovimientoClienteServlet extends HttpServlet {
 
+    @EJB
+    private MovimientoFacade movBD;
+    @EJB
+    private CuentaFacade cuenBD;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,19 +45,37 @@ public class altaClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet altaClienteServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet altaClienteServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        Cliente cliente = null;
+        Cuenta cuenta = null;
+        List<Movimiento> movimientos;
+        double saldo = 0;
+        HttpSession session = request.getSession();
+        
+        // Obtengo la sesión del cliente.
+        cliente = (Cliente) session.getAttribute("cliente");
+        cuenta = (Cuenta) session.getAttribute("cuenta");
+        
+        // Si el cliente tiene sesión ...
+        if (cliente != null) {
+            String concepto = request.getParameter("concepto");
+            String ingresos = request.getParameter("ingresos");
+            String gastos = request.getParameter("gastos");
+            
+            cuenta = cliente.getCuentaList().get(0);
+            movimientos = movBD.buscarPorCuentaOrderByFechaDesc(cuenta, ingresos != null, gastos != null, concepto == null ? "" : concepto);
+            
+            saldo = cuenBD.getSaldoCuenta(cuenta.getNumeroStr());
+            
+            request.setAttribute("cliente", cliente);
+            request.setAttribute("movimientos", movimientos);
+            request.setAttribute("saldo", saldo);
+            request.setAttribute("concepto", concepto == null ? "" : concepto);
+            request.setAttribute("ingresos", new Boolean(ingresos != null));
+            request.setAttribute("gastos", new Boolean(gastos != null));
         }
+        
+        RequestDispatcher dispacher = getServletContext().getRequestDispatcher("/Cliente/movimientosCliente.jsp");
+        dispacher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

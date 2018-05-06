@@ -6,3 +6,11 @@ nbdist/
 .nb-gradle/
 /AppBanco2-war/nbproject/private/
 /AppBanco2-ejb/nbproject/private/
+*.properties
+*.xml
+*.properties
+/AppBanco-war/nbproject/private/
+/AppBanco-ejb/nbproject/private/
+/GuerreroRuiz/nbproject/private/
+/GuerreroRuiz/GuerreroRuiz-war/nbproject/private/
+/GuerreroRuiz/GuerreroRuiz-ejb/nbproject/private/

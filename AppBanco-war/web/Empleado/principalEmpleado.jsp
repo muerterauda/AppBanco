@@ -24,19 +24,19 @@
                 <ul>
                     <li>
                         <h1> Apuntes </h1>
-                        <a href="../ppalEmpleadoServlet " >
+                        <a href="MovimientosEmpleado">
                             <span>Apuntes</span>
                         </a>
                     </li>
                     <li>
                         <h1> Alta de Usuarios</h1>
-                        <a href="../ppalEmpleadoServlet ">
+                        <a href="AltaCliente?error=0">
                             <span>Alta de Usuarios</span>
                         </a>
                     </li>
                     <li>
                         <h1> Salir </h1>
-                        <a href="../ppalEmpleadoServlet ">
+                        <a href="Cambio?cambio=0">
                             <span>Salir</span>
                         </a>
                     </li>
