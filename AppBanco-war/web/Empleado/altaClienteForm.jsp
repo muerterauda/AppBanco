@@ -13,6 +13,7 @@
     String email = (String) request.getAttribute("email");
     String direccion = (String) request.getAttribute("direccion");
     String telefono = (String) request. getAttribute("telefono");
+    String error=(String) request.getAttribute("error");
 %>
 <html
     <head>
@@ -32,6 +33,12 @@
                 <p><span> Dirección:</span><input type="text" name ="direccion" value = <%= direccion%>></p>
                 <p><span> Teléfono: </span><input type="text" name ="telefono" value = <%= telefono%>></p>
                 <hr />
+                <%
+                     if (error != null) {%>
+                    <div class="error"> 
+                        <p><%=error%></p>
+                    </div>
+                   <%   }%>
                 <div class="form-button-right">
                     <a href="VolverPrincipalEmpleado" class="button">Cancelar</a>
                     <input type="submit" value="Registrar">
