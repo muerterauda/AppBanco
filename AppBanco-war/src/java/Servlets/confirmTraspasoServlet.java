@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name="confirmTraspasoServlet",urlPatterns = {"/confirmTraspasoServlet"})
 public class confirmTraspasoServlet extends HttpServlet {
+    boolean error=false;
     @EJB
     ClienteFacade clientef;
     
@@ -55,15 +56,15 @@ public class confirmTraspasoServlet extends HttpServlet {
             throws ServletException, IOException {
         
         if(request.getParameter("cuentaDest")==null || request.getParameter("cuentaDest").equals("")){
+            error=true;
             request.setAttribute("error", "El numero de cuenta es null o está vacio");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
-            rd.forward(request, response);
+
         }
         
         if(request.getParameter("cantidad")==null || request.getParameter("cantidad").equals("") ){
+            error=true;
             request.setAttribute("error", "La cantidad es null o esta vacia");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
-            rd.forward(request, response);
+
         }
         
         double cantidad=0;
@@ -73,15 +74,15 @@ public class confirmTraspasoServlet extends HttpServlet {
             cantidad=Double.parseDouble(request.getParameter("cantidad"));
             
         }catch(NumberFormatException ex){
+            error=true;
             request.setAttribute("error", "La cantidad no es un numero");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
-            rd.forward(request, response);
+
         }
         
         if(cantidad<0){
+            error=true;
             request.setAttribute("error", "La cantidad es menor que cero");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
-            rd.forward(request, response);
+
         }
         
         HttpSession session=request.getSession();
@@ -90,37 +91,33 @@ public class confirmTraspasoServlet extends HttpServlet {
         double saldoOrigen= cuentaf.getSaldoCuenta(cuentaOrigen.getNumeroStr());
         
         if(cuentaDestino==null){
+            error=true;
             request.setAttribute("error", "La cuenta introducida no es valida");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
-            rd.forward(request, response);
+
         }
         
         if(saldoOrigen-cantidad<0){
+            error=true;
             request.setAttribute("error", "La cantidad introducida es mayor al saldo que tienes");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
-            rd.forward(request, response);
+
         }
         
         if(cuentaDestino.getNumeroStr().equals(cuentaOrigen.getNumeroStr())){
+            error=true;
             request.setAttribute("error", "La cuenta origen es la misma que la destino");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
-            rd.forward(request, response);
-        }
-        
-        if(cantidad==0){
-            request.setAttribute("error", "La cantidad es cero");
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
-            rd.forward(request, response);
-        }
-        
-        movimientof.realizarTransferencia(cuentaDestino, cantidad, saldoOrigen, cuentaOrigen);
 
+        }
         
-        //tengo que comprobar que no me quedo sin dinero
+        RequestDispatcher rd;
+        if(!error){
+            movimientof.realizarTransferencia(cuentaDestino, cantidad, saldoOrigen, cuentaOrigen);
+            rd = getServletContext().getRequestDispatcher("/Movimientos");
+            
+        }else{
+            rd = this.getServletContext().getRequestDispatcher("/traspasoServlet");
+        }
         
-        RequestDispatcher dispacher = getServletContext().getRequestDispatcher("/Movimientos");
-        dispacher.forward(request, response);
-        
+        rd.forward(request, response);
     }
 
     

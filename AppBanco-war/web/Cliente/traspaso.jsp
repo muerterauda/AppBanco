@@ -27,7 +27,7 @@
             <div id="content">
                 <h3>Bienvenido: <%= cliente.getNombre() %> <%= cliente.getApellidos() %></h3>
                 <h3>Saldo: <%= request.getAttribute("saldo") %> </h3>
-            <form name="confirmTraspaso" action="confirmTraspasoServlet" >
+                <form name="confirmTraspaso" action="confirmTraspasoServlet" method="post">
                 <p><span> Cuenta destino: </span><input type="text" name ="cuentaDest"></p>
                 <p><span> Cantidad:  </span><input type="text" name ="cantidad"</p>
                 <hr />
