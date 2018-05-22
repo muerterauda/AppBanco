@@ -22,7 +22,7 @@
                     </p>
                 </div>
                 <div id="content-main">
-                    <h:dataTable value="#{movimientosClienteBean.movimientos}" var="mov" >
+                    <h:dataTable id="datatable" value="#{movimientosClienteBean.movimientos}" var="mov" >
                         <h:column>
                             <f:facet name = "header">Concepto</f:facet>
                             #{mov.concepto}
@@ -42,24 +42,39 @@
                     </h:dataTable>
                 </div>
                 <div id="content-side">
-                    <form name="search-mov" action="Movimientos">
-                        <input type="text" name="concepto" value=""/>
-                        <input type="submit" value="Filtrar" />
+                    <h:form>
+                        <h:inputText value="#{movimientosClienteBean.conceptoFiltro}"
+                                     id="inputconceptofiltro">
+                            <f:ajax  render="datatable"
+                                     listener="#{movimientosClienteBean.doFilter()}"
+                                     execute="@all"
+                                     event="keyup"/>
+                        </h:inputText>
                         <div class="checkbox-rounded">
                             <label class="switch">
-                                <input type="checkbox" name="ingresos" value="si" />
+                                <h:selectBooleanCheckbox value="#{movimientosClienteBean.ingresos}">
+                                    <f:ajax listener="#{movimientosClienteBean.doFilter()}"
+                                            render="datatable"
+                                            execute="@all"
+                                            />
+                                </h:selectBooleanCheckbox>
                                 <span class="slider round"></span>
                             </label>
                             <p>Ingresos</p>
                         </div>
                         <div class="checkbox-rounded">
                             <label class="switch">
-                                <input type="checkbox" name="gastos" value="si" />
+                                <h:selectBooleanCheckbox value="#{movimientosClienteBean.gastos}">
+                                    <f:ajax listener="#{movimientosClienteBean.doFilter()}"
+                                            render="datatable"
+                                            execute="@all"
+                                            />
+                                </h:selectBooleanCheckbox>
                                 <span class="slider round"></span>
                             </label>
                             <p>Gastos</p>
                         </div>
-                    </form>
+                    </h:form>
                 </div>
                 <div style="clear: both;"></div>
             </div>

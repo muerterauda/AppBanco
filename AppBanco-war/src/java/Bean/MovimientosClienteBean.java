@@ -11,24 +11,45 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
+
 
 /**
  *
  * @author user
  */
 @Named(value = "movimientosClienteBean")
-@Dependent
-public class MovimientosClienteBean extends ClienteSessionBeanAbstract{
-    
+@RequestScoped
+public class MovimientosClienteBean extends ClienteSessionBeanAbstract {
+
     @EJB
     private MovimientoFacade mf;
-    private List<Movimiento>movimientos; 
-    
+    private List<Movimiento> movimientos;
+    private String conceptoFiltro;
+    private Boolean ingresos;
+    private Boolean gastos;
+
     /**
      * Creates a new instance of MovimientosClienteBean
      */
     public MovimientosClienteBean() {
+        ingresos=false;
+        gastos=false;
+        conceptoFiltro="";
+    }
+
+   
+    @PostConstruct
+    public void doInit() {
+        movimientos = mf.buscarPorCuenta(super.getCuenta());
+    }
+
+    public MovimientoFacade getMf() {
+        return mf;
+    }
+
+    public void setMf(MovimientoFacade mf) {
+        this.mf = mf;
     }
 
     public List<Movimiento> getMovimientos() {
@@ -39,9 +60,31 @@ public class MovimientosClienteBean extends ClienteSessionBeanAbstract{
         this.movimientos = movimientos;
     }
 
-    
-    @PostConstruct
-    public void doInit(){
-        movimientos=mf.buscarPorCuentaOrderByFechaDesc(getCuenta(), Boolean.TRUE, Boolean.TRUE, null);
+    public String getConceptoFiltro() {
+        return conceptoFiltro;
     }
+
+    public void setConceptoFiltro(String conceptoFiltro) {
+        this.conceptoFiltro = conceptoFiltro;
+    }
+
+    public Boolean getIngresos() {
+        return ingresos;
+    }
+
+    public void setIngresos(Boolean ingresos) {
+        this.ingresos = ingresos;
+    }
+
+    public Boolean getGastos() {
+        return gastos;
+    }
+
+    public void setGastos(Boolean gastos) {
+        this.gastos = gastos;
+    }
+     public void doFilter() {
+         movimientos=mf.buscarPorCuentaOrderByFechaDesc(getCuenta(), ingresos, gastos, conceptoFiltro);
+    }
+
 }

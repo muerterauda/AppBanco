@@ -11,8 +11,8 @@ import AppBanco.entity.Cliente;
 import AppBanco.entity.Cuenta;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 /**
@@ -20,7 +20,7 @@ import javax.inject.Inject;
  * @author user
  */
 @Named(value = "clienteSessionBeanAbstract")
-@Dependent
+@RequestScoped
 public abstract class ClienteSessionBeanAbstract {
     @Inject
     private LoginClienteBean l;
@@ -35,7 +35,7 @@ public abstract class ClienteSessionBeanAbstract {
      * Creates a new instance of ClienteSessionBeanAbstract
      */
     public ClienteSessionBeanAbstract() {
-        
+        int i=1;
     }
     public Cliente getCliente(){
         return cliente;
