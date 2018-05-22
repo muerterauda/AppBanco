@@ -7,7 +7,6 @@ package Bean;
 
 import AppBanco.ejb.ClienteFacade;
 import AppBanco.entity.Cliente;
-import AppBanco.entity.Cuenta;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;

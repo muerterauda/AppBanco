@@ -6,15 +6,16 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <link href="./css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"/>
         <title>Movimientos Cliente</title>
     </h:head>
     <h:body>
-        <ui:insert name="content" >
-             <ui:include src="header.xhtml"/>
-        </ui:insert>
-        <div id="content">
+        <div id="content-app">
+            <ui:insert name="content" >
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+            <div id="content">
                 <div id="content-header">
                     <p>
                         Hola <h:outputText value="#{movimientosClienteBean.cliente.nombre}"></h:outputText>, tienes un saldo de
@@ -36,7 +37,7 @@
                             #{mov.importe}
                         </h:column>
                         <h:column>
-                             <f:facet name = "header">Saldo después</f:facet>
+                            <f:facet name = "header">Saldo después</f:facet>
                             #{mov.saldo}
                         </h:column>
                     </h:dataTable>
@@ -78,6 +79,7 @@
                 </div>
                 <div style="clear: both;"></div>
             </div>
+        </div>
     </h:body>
 </html>
 
