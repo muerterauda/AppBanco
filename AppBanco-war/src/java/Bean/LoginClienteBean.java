@@ -59,12 +59,12 @@ public class LoginClienteBean implements Serializable {
     
     public String doLogin(){
         cliente=Conectorcliente.find(dni);
-        String page="MovimientosCliente.xhtml";
+        String page="LoginCliente.xhtml";
         if(cliente==null||!cliente.getContrasenya().equals(password)){
               if(cliente==null){
                   setError("Error: No existe el usuario");
               }else if(!cliente.getContrasenya().equals(password)){
-                  setError("Error: La contrase&ntilde;a no coincide");
+                  setError("Error: La contraseña no coincide");
               }else{
                   setError("Error: Error con la cuenta contacta con el banco");
               }
