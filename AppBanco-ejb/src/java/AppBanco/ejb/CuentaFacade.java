@@ -79,20 +79,11 @@ public class CuentaFacade extends AbstractFacade<Cuenta> {
         return cuenta;
     }
     
-    public void transferencia(Cuenta ordenante, Cuenta benefactor, double cantidad) throws Exception{
+    public void transferencia(Cuenta ordenante, Cuenta benefactor, double cantidad,
+                              double saldoOrd, double saldoBen) {
         Movimiento movOrd;
         Movimiento movBen;
         Operacion operacion;
-        double saldoOrd;
-        double saldoBen;
-        
-        comprobarValidezTransferencia(ordenante, benefactor, cantidad);
-        saldoOrd = getSaldoCuenta(ordenante.getNumeroStr());
-        
-        if (saldoOrd < cantidad)
-            throw new Exception("El ordenante no tiene suficiente saldo");
-        
-        saldoBen = getSaldoCuenta(benefactor.getNumeroStr());
 
         // Creo lo dos movimientos
         operacion = new Operacion(0, "TRASPASO");
@@ -109,20 +100,6 @@ public class CuentaFacade extends AbstractFacade<Cuenta> {
         
         em.persist(movOrd);
         em.persist(movBen);
-    }
-
-    private void comprobarValidezTransferencia(Cuenta ordenante, Cuenta benefactor, double cantidad) throws IllegalArgumentException, NullPointerException {
-        if (ordenante == null)
-            throw new NullPointerException("Se esperaba un ordenante no nulo");
-        
-        if (benefactor == null)
-            throw new NullPointerException("Se esperaba un benefactor no nulo");
-        
-        if (cantidad <= 0)
-            throw new IllegalArgumentException("Se esperaba un importe positivo mayor que 0");
-        
-        if (ordenante.equals(benefactor))
-            throw new IllegalArgumentException("El benefactor y el ordenante no puede ser el mismo");
     }
     
 }

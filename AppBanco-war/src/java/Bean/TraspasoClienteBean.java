@@ -78,22 +78,43 @@ public class TraspasoClienteBean extends ClienteSessionBeanAbstract {
         
         // Si la cuenta existe...
         if (cuenta != null) {
+            double saldoOrd = cuentaEJB.getSaldoCuenta(super.getCuenta().getNumeroStr());
+            double saldoBen = cuentaEJB.getSaldoCuenta(cuentaStr);
             
-            // Hago la transferencia en la base de datos.
             try {
-                cuentaEJB.transferencia(super.getCuenta(), cuenta, cantidad);
+                // Valido las precondiciones para poder hacer la transferencia ....
+                comprobarValidezTransferencia(cuenta, cuenta, cantidad, saldoOrd);
+                // Hago la transferencia en la base de datos.
+                cuentaEJB.transferencia(super.getCuenta(), cuenta, cantidad, saldoOrd, saldoBen);
+                paginaFin = "MovimientosCliente.xhtml";
             }
-            catch(EJBException ex) {
+            catch (RuntimeException ex) {
                 setErrorMsg(ex.getMessage());
-            } catch (Exception ex) {
-                setErrorMsg(ex.getMessage());                
             }
-            
-        }
-        else 
+
+        } else
             setErrorMsg("El benefactor no existe.");
         
         return paginaFin;
+    }
+
+    private void comprobarValidezTransferencia(Cuenta ordenante, Cuenta benefactor, double cantidad,
+                                               double saldoOrd) {
+        if (ordenante == null)
+            throw new NullPointerException("Se esperaba un ordenante no nulo");
+        
+        if (benefactor == null)
+            throw new NullPointerException("Se esperaba un benefactor no nulo");
+        
+        if (cantidad <= 0)
+            throw new IllegalArgumentException("Se esperaba un importe positivo mayor que 0");
+        
+        if (ordenante.equals(benefactor))
+            throw new IllegalArgumentException("El benefactor y el ordenante no puede ser el mismo");
+        
+        if (saldoOrd < cantidad) 
+            throw new RuntimeException("El ordenante no tiene suficiente saldo");
+
     }
     
     
