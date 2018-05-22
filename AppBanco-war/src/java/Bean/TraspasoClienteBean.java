@@ -73,19 +73,19 @@ public class TraspasoClienteBean extends ClienteSessionBeanAbstract {
     }
     
     public String doTransfer() {
-        Cuenta cuenta = cuentaEJB.findCuentaNumeroStr(cuentaStr);
+        Cuenta benefactor = cuentaEJB.findCuentaNumeroStr(cuentaStr);
         String paginaFin = null;
         
         // Si la cuenta existe...
-        if (cuenta != null) {
+        if (benefactor != null) {
             double saldoOrd = cuentaEJB.getSaldoCuenta(super.getCuenta().getNumeroStr());
             double saldoBen = cuentaEJB.getSaldoCuenta(cuentaStr);
             
             try {
                 // Valido las precondiciones para poder hacer la transferencia ....
-                comprobarValidezTransferencia(cuenta, cuenta, cantidad, saldoOrd);
+                comprobarValidezTransferencia(super.getCuenta(), benefactor, cantidad, saldoOrd);
                 // Hago la transferencia en la base de datos.
-                cuentaEJB.transferencia(super.getCuenta(), cuenta, cantidad, saldoOrd, saldoBen);
+                cuentaEJB.transferencia(super.getCuenta(), benefactor, cantidad, saldoOrd, saldoBen);
                 paginaFin = "MovimientosCliente.xhtml";
             }
             catch (RuntimeException ex) {
