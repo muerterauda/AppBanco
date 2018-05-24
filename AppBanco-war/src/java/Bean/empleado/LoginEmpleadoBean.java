@@ -7,26 +7,28 @@ package Bean.empleado;
 
 import AppBanco.ejb.EmpleadoFacade;
 import AppBanco.entity.Empleado;
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author elias
  */
 @Named(value = "loginEmpleadoBean")
-@Dependent
-public class LoginEmpleadoBean {
+@SessionScoped
+public class LoginEmpleadoBean implements Serializable {
 
     /**
      * Creates a new instance of LoginEmpleadoBean
      */
     public LoginEmpleadoBean() {
     }
-    
-     @EJB
+
+    @EJB
     private EmpleadoFacade empleadoFacade;
 
     /**
@@ -35,12 +37,20 @@ public class LoginEmpleadoBean {
     private String idEmpleado;
     private String password;
     private Empleado empleado;
-    
+    private String error;
+    private int idEmpleadoparse;
 
-    
     @PostConstruct
-    public void init(){
-        
+    public void init() {
+       
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getError() {
+        return error;
     }
 
     public String getIdEmpleado() {
@@ -66,14 +76,44 @@ public class LoginEmpleadoBean {
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }
-    
-    public String doLogin(){
+
+    public String doLogin() {
+        String ret = "loginEmpleado";
+        try {
+            if (idEmpleado.equals("")) {
+                setError("Error: Id de empleado vacio");
+            }
+
+            if (password.equals("")) {
+                setError("Error: Contraseña vacia");
+            }
+
+            if (idEmpleado != null) {
+                idEmpleadoparse = Integer.parseInt(idEmpleado);
+            }
+
+            empleado = empleadoFacade.find(idEmpleadoparse);
+
+            if (empleado == null || !empleado.getContrasenya().equals(password)) {
+                if (empleado == null) {
+                    setError("Error: No existe el usuario");
+                } else {
+                    setError("Error: La contraseña es incorrecta");
+                }
+            } else {
+                ret="principalEmpleado.xhtml";
+                setEmpleado(empleado);
+                setError(new String());
+            }
+            
+
+        } catch (NumberFormatException ex) {
+            setError("Error: El id de usuario no es un numero");
+        }
+
         
         
-        
-        
-        
-        return "principalEmpleado";
+        return ret;
     }
-    
+
 }

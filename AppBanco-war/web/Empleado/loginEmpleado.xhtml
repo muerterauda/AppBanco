@@ -11,22 +11,19 @@
     <h:body>
         <div id="content-app-medium" >
             <h:form>
-                <h1 >Acceso Autorizado</h1>
+                <h1>Acceso Autorizado</h1>
                 <hr />               
-                <p><span>Numero Empleado: </span><h:inputText value="#{ loginEmpleadoBean.idEmpleado }" /> </p>
-                <p> <span> Contraseña: </span><h:inputText value="#{loginEmpleadoBean.password}"/></h4> </p>
+                <p> <span>Numero Empleado: </span> <h:inputText value="#{ loginEmpleadoBean.idEmpleado }" /> </p>
+                <p> <span> Contraseña: </span> <h:inputSecret value="#{loginEmpleadoBean.password}"/> </p>
                 <hr />
                 <div class="form-button-center">
-                    <p> <h:commandButton action="#{ loginEmpleadoBean.doLogin()}" title="Entrar"/> </p>
+                    <p> <h:commandButton action="#{ loginEmpleadoBean.doLogin()}" value="Entrar"/> </p>
                 </div>
             </h:form>
-            <% String error = (String) request.getAttribute("error");
-                if (error != null) {%>
-                    <div class="error"> 
-                        <p><%=error%></p>
-                    </div>
-            <%   }%>
-            <a href="Cambio?cambio=1">Inicio cliente</a>
+                <div class="error"> 
+                    <p><h:outputText value="#{loginEmpleadoBean.error}"></h:outputText></p>
+                </div>
+            <h:button outcome="/Cliente/LoginCliente" value="Login Cliente" />
         </div>
     </h:body>
 </html>
