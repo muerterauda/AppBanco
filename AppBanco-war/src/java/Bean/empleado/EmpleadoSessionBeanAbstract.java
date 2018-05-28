@@ -22,8 +22,6 @@ import javax.inject.Inject;
 @SessionScoped
 public class EmpleadoSessionBeanAbstract implements Serializable {
 
-    @EJB
-    private CuentaFacade cuentaFacade;
     
     
     @Inject
