@@ -5,10 +5,12 @@
  */
 package Bean.empleado;
 
+import AppBanco.ejb.ClienteFacade;
 import AppBanco.ejb.CuentaFacade;
 import AppBanco.entity.Cliente;
 import AppBanco.entity.Cuenta;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -22,17 +24,12 @@ import javax.inject.Inject;
 @SessionScoped
 public class EmpleadoSessionBeanAbstract implements Serializable {
 
-    
-    
+    private Cliente cliente;
+    private Cuenta cuenta;
+
     @Inject
     private LoginEmpleadoBean loginBean;
-    
-    private Cuenta cuenta;
-    private Cliente cliente;
-    
-    
-    
-    
+     
     /**
      * Creates a new instance of EmpleadoSessionBeanAbstract
      */

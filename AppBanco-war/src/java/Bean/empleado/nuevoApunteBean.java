@@ -5,10 +5,13 @@
  */
 package Bean.empleado;
 
+import AppBanco.ejb.EmpleadoFacade;
 import AppBanco.ejb.MovimientoFacade;
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 /**
@@ -16,8 +19,8 @@ import javax.inject.Inject;
  * @author elias
  */
 @Named(value = "nuevoApunteBean")
-@Dependent
-public class nuevoApunteBean {
+@RequestScoped
+public class nuevoApunteBean implements Serializable {
 
     @EJB
     private MovimientoFacade movimientoFacade;
@@ -28,12 +31,18 @@ public class nuevoApunteBean {
     
     
     private String cantidadTexto;
+    private String error;
     private String tipo;
-    private String error="";
     /**
      * Creates a new instance of nuevoApunteBean
      */
     public nuevoApunteBean() {
+    }
+    @PostConstruct
+    public void init(){
+        error="";
+        tipo="I";
+        cantidadTexto="";
     }
 
     public void setError(String error) {
@@ -44,7 +53,7 @@ public class nuevoApunteBean {
         return error;
     }
 
-    public String getCantidad() {
+    public String getCantidadTexto() {
         return cantidadTexto;
     }
 
@@ -52,19 +61,20 @@ public class nuevoApunteBean {
         return tipo;
     }
 
-    public void setCantidad(String cantidad) {
-        this.cantidadTexto = cantidad;
+    public void setCantidadTexto(String cantidadt) {
+        this.cantidadTexto = cantidadt;
     }
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    // aqui se usa la primera cuenta de la lista de cuentas del cliente, tengo que preguntar como se la cuenta concreta seleccionada.
+    
     public String doApunte(){
         String ret="nuevoApunte.xhtml";
         try{
-        double cantidad=Double.parseDouble(cantidadTexto);
-        movimientoFacade.nuevoApunte(tipo, empleadosession.getLoginBean().getEmpleado() , empleadosession.getCuenta(), cantidad);
+        double dinero=Double.parseDouble(cantidadTexto);
+        
+        movimientoFacade.nuevoApunte(tipo, empleadosession.getLoginBean().getEmpleado() , empleadosession.getCuenta(), dinero);
         }catch(NumberFormatException e){
             setError("La cantidad introducida no es un numero");
         }

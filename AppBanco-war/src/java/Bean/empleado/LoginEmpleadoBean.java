@@ -20,7 +20,7 @@ import javax.enterprise.context.SessionScoped;
  * @author elias
  */
 @Named(value = "loginEmpleadoBean")
-@RequestScoped
+@SessionScoped
 public class LoginEmpleadoBean implements Serializable {
 
     /**

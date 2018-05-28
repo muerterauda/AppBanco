@@ -14,10 +14,10 @@
             <h:form>
                 <h2> #{ empleadoSessionBeanAbstract.cliente.dni }</h2>
                 <hr/>
-                <p><span>Cantidad: </span><h:inputText value="#{nuevoApunteBean.cantidad}"  /></p>
+                <p><span>Cantidad: </span><h:inputText value="#{nuevoApunteBean.cantidadTexto}"  /></p>
                 <p><span>Accion</span> 
                     <h:selectOneRadio value="#{nuevoApunteBean.tipo}">
-                        <f:selectItem itemValue="I" itemLabel="Ingreso" />
+                        <f:selectItem itemValue="I" itemLabel="Ingreso"  />
                         <f:selectItem itemValue="R" itemLabel="Reintegro"/>
                     </h:selectOneRadio>
                     
