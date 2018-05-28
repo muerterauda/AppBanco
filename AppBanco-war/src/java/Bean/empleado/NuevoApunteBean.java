@@ -18,9 +18,9 @@ import javax.inject.Inject;
  *
  * @author elias
  */
-@Named(value = "nuevoApunteBean")
+@Named(value = "NuevoApunteBean")
 @RequestScoped
-public class nuevoApunteBean implements Serializable {
+public class NuevoApunteBean implements Serializable {
 
     @EJB
     private MovimientoFacade movimientoFacade;
@@ -36,7 +36,7 @@ public class nuevoApunteBean implements Serializable {
     /**
      * Creates a new instance of nuevoApunteBean
      */
-    public nuevoApunteBean() {
+    public NuevoApunteBean() {
     }
     @PostConstruct
     public void init(){

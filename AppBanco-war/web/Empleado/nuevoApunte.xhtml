@@ -12,11 +12,11 @@
     <h:body>
         <div id="content-app-medium">
             <h:form>
-                <h2> #{ empleadoSessionBeanAbstract.cliente.dni }</h2>
+                <h2> #{ EmpleadoSessionBeanAbstract.cliente.dni }</h2>
                 <hr/>
-                <p><span>Cantidad: </span><h:inputText value="#{nuevoApunteBean.cantidadTexto}"  /></p>
+                <p><span>Cantidad: </span><h:inputText value="#{NuevoApunteBean.cantidadTexto}"  /></p>
                 <p><span>Accion</span> 
-                    <h:selectOneRadio value="#{nuevoApunteBean.tipo}">
+                    <h:selectOneRadio value="#{NuevoApunteBean.tipo}">
                         <f:selectItem itemValue="I" itemLabel="Ingreso"  />
                         <f:selectItem itemValue="R" itemLabel="Reintegro"/>
                     </h:selectOneRadio>
@@ -24,11 +24,11 @@
                 </p>
                 <hr/>
                 <div class="error"> 
-                    <p><h:outputText value="#{nuevoApunteBean.error}"></h:outputText></p>
+                    <p><h:outputText value="#{NuevoApunteBean.error}"></h:outputText></p>
                 </div>
                 <div class="form-button-right">
                     <h:button outcome="principalEmpleado" value="Cancelar"/>
-                    <h:commandButton action="#{ nuevoApunteBean.doApunte()}" value="Realizar Apunte"/>
+                    <h:commandButton action="#{ NuevoApunteBean.doApunte()}" value="Realizar Apunte"/>
                 </div>
                 <div style="clear: both;"></div>
             </h:form>

@@ -20,7 +20,7 @@ import javax.inject.Inject;
  *
  * @author elias
  */
-@Named(value = "empleadoSessionBeanAbstract")
+@Named(value = "EmpleadoSessionBeanAbstract")
 @SessionScoped
 public class EmpleadoSessionBeanAbstract implements Serializable {
 
