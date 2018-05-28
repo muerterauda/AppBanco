@@ -5,8 +5,11 @@
  */
 package Bean.empleado;
 
+import AppBanco.ejb.CuentaFacade;
 import AppBanco.entity.Cliente;
+import AppBanco.entity.Cuenta;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -18,9 +21,15 @@ import javax.inject.Inject;
 @Named(value = "empleadoSessionBeanAbstract")
 @SessionScoped
 public class EmpleadoSessionBeanAbstract implements Serializable {
+
+    @EJB
+    private CuentaFacade cuentaFacade;
+    
+    
     @Inject
     private LoginEmpleadoBean loginBean;
     
+    private Cuenta cuenta;
     private Cliente cliente;
     
     
@@ -36,12 +45,20 @@ public class EmpleadoSessionBeanAbstract implements Serializable {
         return loginBean;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Cuenta getCuenta() {
+        return cuenta;
     }
 
     public void setLoginBean(LoginEmpleadoBean loginBean) {
         this.loginBean = loginBean;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public void setCliente(Cliente cliente) {
