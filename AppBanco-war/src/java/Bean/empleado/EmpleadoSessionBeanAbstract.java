@@ -9,6 +9,7 @@ import AppBanco.ejb.ClienteFacade;
 import AppBanco.ejb.CuentaFacade;
 import AppBanco.entity.Cliente;
 import AppBanco.entity.Cuenta;
+import AppBanco.entity.Empleado;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -36,16 +37,10 @@ public class EmpleadoSessionBeanAbstract implements Serializable {
     public EmpleadoSessionBeanAbstract() {
     }
 
-    public LoginEmpleadoBean getLoginBean() {
-        return loginBean;
-    }
+   
 
     public Cuenta getCuenta() {
         return cuenta;
-    }
-
-    public void setLoginBean(LoginEmpleadoBean loginBean) {
-        this.loginBean = loginBean;
     }
 
     public void setCuenta(Cuenta cuenta) {
@@ -60,7 +55,9 @@ public class EmpleadoSessionBeanAbstract implements Serializable {
         this.cliente = cliente;
     }
     
-    
+    public Empleado getEmpleado(){
+        return loginBean.getEmpleado();
+    }
     
     
     
