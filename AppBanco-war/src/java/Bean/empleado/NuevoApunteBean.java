@@ -74,7 +74,7 @@ public class NuevoApunteBean implements Serializable {
         try{
         double dinero=Double.parseDouble(cantidadTexto);
         
-        movimientoFacade.nuevoApunte(tipo, empleadosession.getLoginBean().getEmpleado() , empleadosession.getCuenta(), dinero);
+        movimientoFacade.nuevoApunte(tipo, empleadosession.getEmpleado() , empleadosession.getCuenta(), dinero);
         }catch(NumberFormatException e){
             setError("La cantidad introducida no es un numero");
         }
