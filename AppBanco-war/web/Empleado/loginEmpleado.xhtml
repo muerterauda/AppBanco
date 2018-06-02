@@ -13,11 +13,11 @@
             <h:form>
                 <h1>Acceso Autorizado</h1>
                 <hr />               
-                <p> <span>Numero Empleado: </span> <h:inputText value="#{ loginEmpleadoBean.idEmpleado }" /> </p>
+                <p> <span>Numero Empleado: </span> <h:inputText value="#{loginEmpleadoBean.idEmpleado}" /> </p>
                 <p> <span> Contraseña: </span> <h:inputSecret value="#{loginEmpleadoBean.password}"/> </p>
                 <hr />
                 <div class="form-button-center">
-                    <p> <h:commandButton action="#{ loginEmpleadoBean.doLogin()}" value="Entrar"/> </p>
+                    <p> <h:commandButton action="#{loginEmpleadoBean.doLogin()}" value="Entrar"/> </p>
                 </div>
             </h:form>
                 <div class="error"> 
