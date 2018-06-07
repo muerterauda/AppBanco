@@ -18,26 +18,26 @@
             <div id="content">
                 <div id="content-header">
                     <p>
-                        Hola <h:outputText value="#{movimientosClienteBean.cliente.nombre}"></h:outputText>, tienes un saldo de
+                        #{msg['hola']} <h:outputText value="#{movimientosClienteBean.cliente.nombre}"></h:outputText> #{msg['saldoIgualA']}
                         <h:outputText value="#{movimientosClienteBean.saldo}"></h:outputText>.
                     </p>
                 </div>
                 <div id="content-main">
                     <h:dataTable id="datatable" value="#{movimientosClienteBean.movimientos}" var="mov" >
                         <h:column>
-                            <f:facet name = "header">Concepto</f:facet>
+                            <f:facet name = "header"> #{msg['concepto']}</f:facet>
                             #{mov.concepto}
                         </h:column>
                         <h:column>
-                            <f:facet name = "header">Fecha de comprobante</f:facet>
+                            <f:facet name = "header">#{msg['fechaComprobante']}</f:facet>
                             #{mov.fecha}
                         </h:column>
                         <h:column>
-                            <f:facet name = "header">Valor</f:facet>
+                            <f:facet name = "header">#{msg['value']}</f:facet>
                             #{mov.importe}
                         </h:column>
                         <h:column>
-                            <f:facet name = "header">Saldo después</f:facet>
+                            <f:facet name = "header">#{msg['balanceAfter']}</f:facet>
                             #{mov.saldo}
                         </h:column>
                     </h:dataTable>

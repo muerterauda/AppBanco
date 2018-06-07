@@ -8,10 +8,10 @@
         <div id="nav">
             <div id="navegador">
                 <ul>
-                    <li><a href="MovimientosCliente.xhtml">Movimientos</a></li>
-                    <li><a href="transferencias.xhtml" >Traspasos</a></li>
-                    <li><a href="#" >Ayuda</a></li>  
-                    <li><a href="#">Cerrar sesión</a></li>
+                    <li><h:link  outcome="MovimientosCliente" #{msg['movimientos']}/></li>
+                    <li><h:link outcome="transferencias" #{msg['transferencias']}/></li>
+                    <li><h:link outcome="ayuda.jsp" value="#{msg['Ayuda']}"/></li>  
+                    <li><h:link outcome="" value="#{msg['Logout']}"/></li>
                 </ul>
                 <div style="clear:both"></div>
             </div>
