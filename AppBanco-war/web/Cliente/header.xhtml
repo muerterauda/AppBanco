@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html 
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <body>
@@ -8,10 +9,10 @@
         <div id="nav">
             <div id="navegador">
                 <ul>
-                    <li><h:link  outcome="MovimientosCliente" #{msg['movimientos']}/></li>
-                    <li><h:link outcome="transferencias" #{msg['transferencias']}/></li>
-                    <li><h:link outcome="ayuda.jsp" value="#{msg['Ayuda']}"/></li>  
-                    <li><h:link outcome="" value="#{msg['Logout']}"/></li>
+                    <li><h:link outcome="MovimientosCliente" value="#{msg['movimientos']}"/></li>
+                    <li><h:link outcome="transferencias" value="#{msg['transferencias']}"/></li>
+                    <li><h:link outcome="ayuda" value="#{msg['Ayuda']}"/></li>  
+                    <li><h:link outcome="LoginCliente" value="#{msg['Logout']}"/></li>
                 </ul>
                 <div style="clear:both"></div>
             </div>

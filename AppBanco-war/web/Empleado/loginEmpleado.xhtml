@@ -12,8 +12,8 @@
     <h:body>
         <div id="content-app-medium" >
             <h:form>
-                <h:selectOneMenu value="#{languageBean.localeCode}" onchange="submit()" valueChangeListener="#{languageBean.countryLocaleCodeChanged}">
-                   <f:selectItems value="#{languageBean.countriesInMap}"></f:selectItems>
+               <h:selectOneMenu value="#{localeBean.localeCode}" onchange="submit()" valueChangeListener="#{localeBean.setLocale}">
+                    <f:selectItems value="#{localeBean.countriesInMap}"></f:selectItems>
                </h:selectOneMenu>
                 <h1>Acceso Autorizado</h1>
                 <hr />               
