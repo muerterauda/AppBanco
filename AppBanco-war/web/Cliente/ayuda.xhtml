@@ -1,23 +1,21 @@
-<%-- 
-    Document   : ayuda
-    Created on : 06-abr-2018, 11:19:24
-    Author     : user
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <f:view locale="#{localeBean.currentLocale}"/>
+    <h:head>
         <title>Ayuda</title>
-        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-    </head>
-    <body>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"/>
+    </h:head>
+    <h:body>
         <div id="content-app">
-            <jsp:include page="header.jsp" flush="true">
-                <jsp:param name="title" value="Ayuda" />
-            </jsp:include>
+             <ui:insert name="content" >
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
         <div id="content">
         <h3>Movimientos</h3>
         <p>En la pestaña movientos se encuentra toda la informacion relativa a los movientos del cliente logeado en este momento,
@@ -41,6 +39,6 @@
         </p>
         </div>
         </div>
-    </body>
+    </h:body>
 </html>
 

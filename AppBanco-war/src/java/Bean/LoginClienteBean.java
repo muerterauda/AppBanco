@@ -24,7 +24,7 @@ public class LoginClienteBean implements Serializable {
     private ClienteFacade Conectorcliente;
     private String dni;
     private String password;
-    private String error;
+    private int error;
     private Cliente cliente;
     /**
      * Creates a new instance of LoginClienteBean
@@ -44,14 +44,6 @@ public class LoginClienteBean implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
     
     public Cliente getCliente(){
         return cliente;
@@ -60,13 +52,12 @@ public class LoginClienteBean implements Serializable {
     public String doLogin(){
         cliente=Conectorcliente.find(dni);
         String page="LoginCliente.xhtml";
+        error=0;
         if(cliente==null||!cliente.getContrasenya().equals(password)){
               if(cliente==null){
-                  setError("Error: No existe el usuario");
+                 error=1;
               }else if(!cliente.getContrasenya().equals(password)){
-                  setError("Error: La contraseña no coincide");
-              }else{
-                  setError("Error: Error con la cuenta contacta con el banco");
+                 error=2;
               }
          }else{
               page="MovimientosCliente.xhtml"; //Cambiar al bueno una vez este hecho
@@ -76,5 +67,7 @@ public class LoginClienteBean implements Serializable {
     
     public LoginClienteBean() {
     }
-    
+    public int doError(){
+        return error;
+    }
 }
