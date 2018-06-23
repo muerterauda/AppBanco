@@ -35,7 +35,6 @@ public abstract class ClienteSessionBeanAbstract {
      * Creates a new instance of ClienteSessionBeanAbstract
      */
     public ClienteSessionBeanAbstract() {
-        int i=1;
     }
     public Cliente getCliente(){
         return cliente;

@@ -70,16 +70,18 @@ public class NuevoApunteBean implements Serializable {
     }
     
     public String doApunte(){
-        String ret="nuevoApunte.xhtml";
+        String ret="nuevoApunte";
         try{
         double dinero=Double.parseDouble(cantidadTexto);
         
         movimientoFacade.nuevoApunte(tipo, empleadosession.getEmpleado() , empleadosession.getCuenta(), dinero);
         }catch(NumberFormatException e){
             setError("La cantidad introducida no es un numero");
+        }catch(Exception e){
+             setError("Transaccion no valida");
         }
         if(error.equals("")){
-            ret="principalEmpleado";
+            ret="apuntesEmpleado";
         }
         
         
