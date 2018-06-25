@@ -7,12 +7,11 @@ package Bean.empleado;
 
 import AppBanco.ejb.EmpleadoFacade;
 import AppBanco.entity.Empleado;
-import java.io.Serializable;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-
+import java.io.Serializable;
+import javax.ejb.EJB;
 /**
  *
  * @author elias
@@ -80,11 +79,11 @@ public class LoginEmpleadoBean implements Serializable {
         String ret = "loginEmpleado";
         try {
             if (idEmpleado.equals("")) {
-                setError("Error: Id de empleado vacio");
+                setError("errorEmpleado1");
             }
 
             if (password.equals("")) {
-                setError("Error: Contraseña vacia");
+                setError("errorEmpleado2");
             }
 
             if (idEmpleado != null) {
@@ -95,9 +94,9 @@ public class LoginEmpleadoBean implements Serializable {
 
             if (empleado == null || !empleado.getContrasenya().equals(password)) {
                 if (empleado == null) {
-                    setError("Error: No existe el usuario");
+                    setError("errorEmpleado3");
                 } else {
-                    setError("Error: La contraseña es incorrecta");
+                    setError("errorEmpleado4");
                 }
             } else {
                 ret="principalEmpleado.xhtml";
@@ -107,7 +106,7 @@ public class LoginEmpleadoBean implements Serializable {
             
 
         } catch (NumberFormatException ex) {
-            setError("Error: El id de usuario no es un numero");
+            setError("errorEmpleado5");
         }
 
         

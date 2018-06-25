@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <f:view locale="#{localeBean.currentLocale}"/>
+    <h:head>
+        <title>Ayuda</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+        <div id="content-app">
+             <ui:insert name="content" >
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+        <div id="content">
+            <h3>#{msg.movimientos}</h3>
+        <p>
+            #{msg.ayuda1}
+        </p>
+            <h3>#{msg.transferencias}</h3>
+            <p> #{msg.ayuda2}<i>#{msg.tTransferir}</i> #{msg.ayuda3}
+        </p>
+            <h3>#{msg.Logout}</h3>
+        <p>#{msg.ayuda4}
+        </p>
+            <h3>#{msg.ayAyuda}</h3>
+        <p>#{msg.ayuda5}<i>bancoNoCorruptoAyuda@gmail.es</i>.
+        </p>
+            <h3>#{msg.ayErrores}</h3>
+        <p>#{msg.ayuda6}
+           <i>bancoNoCorruptoErrores@gmail.es</i>.
+        </p>
+        </div>
+        </div>
+    </h:body>
+</html>
+
