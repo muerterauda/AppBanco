@@ -18,7 +18,7 @@
                     <h:form id="search-mov-form">
                         <span>#{msg.aCuentaCliente} </span>
                         <h:inputText id="inputSearchCuenta"
-                                     value="#{apuntesEmpleadoBean.inputCuenta}"/>
+                                     value="#{apuntesEmpleadoBean.inputCuenta}" size="25"/>
                         <h:commandButton value="#{msg.aBuscar}"
                                          action="#{apuntesEmpleadoBean.doSearchCuenta()}"/>
                         <h:commandLink action="#{apuntesEmpleadoBean.mainPage()}" value="#{msg.aPrincipal}" class="button float-right"/>
