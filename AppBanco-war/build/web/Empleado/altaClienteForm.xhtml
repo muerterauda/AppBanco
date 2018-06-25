@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{localeBean.currentLocale}"/>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/style.css" rel="stylesheet" type="text/css"/> <!-- Hasta que sepamos poneerlo en absoluto -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"/>
+        <title>#{msg.nuevocliente}</title>
+    </h:head>
+    <h:body>
+        <div id="content-app-medium">
+            <h:form>
+                <h1>#{msg.nuevocliente}</h1>
+                <hr />
+                <p><span> #{msg['nombre']} </span><h:inputText  value = "#{NuevoClienteBean.nombre}"/></p>
+                <p><span> #{msg.apellidos} </span><h:inputText value ="#{NuevoClienteBean.apellidos}"/></p>
+                <p><span> #{msg.DNI} </span><h:inputText value = "#{NuevoClienteBean.dni}"/></p>
+                <p><span> Email: </span><h:inputText value = "#{NuevoClienteBean.email}"/></p>
+                <p><span> #{msg.direccion}</span><h:inputText value ="#{NuevoClienteBean.direccion}"/></p>
+                <p><span> #{msg.telefono} </span><h:inputText value = "#{NuevoClienteBean.telefono}"/></p>
+                <hr />
+                <div class="error"> 
+                    <ul>
+                        <ui:repeat value="#{NuevoClienteBean.error}" var="error">
+                            <li>
+                                #{msg[error]}
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </div>
+                <div class="form-button-right">
+                    <h:commandButton action="#{NuevoClienteBean.doRegister()}" value="#{msg.registrar}"></h:commandButton>
+                    <div style="clear: both;"></div>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
