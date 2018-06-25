@@ -15,10 +15,10 @@
                <h:selectOneMenu value="#{localeBean.localeCode}" onchange="submit()" valueChangeListener="#{localeBean.setLocale}">
                     <f:selectItems value="#{localeBean.countriesInMap}"></f:selectItems>
                </h:selectOneMenu>
-                <h1>Acceso Autorizado</h1>
+                <h1><h:outputText value="#{msg['accesoautorizado']}"/></h1>
                 <hr />               
-                <p> <span>Numero Empleado: </span> <h:inputText value="#{loginEmpleadoBean.idEmpleado}" /> </p>
-                <p> <span> Contraseña: </span> <h:inputSecret value="#{loginEmpleadoBean.password}"/> </p>
+                <p> <span><h:outputText value="#{msg['numempleado']}"/> </span> <h:inputText value="#{loginEmpleadoBean.idEmpleado}" /> </p>
+                <p> <span> <h:outputText value="#{msg['Password']}"/> </span> <h:inputSecret value="#{loginEmpleadoBean.password}"/> </p>
                 <hr />
                 <div class="form-button-center">
                     <p> <h:commandButton action="#{loginEmpleadoBean.doLogin()}" value="Entrar"/> </p>
@@ -27,7 +27,7 @@
                 <div class="error"> 
                     <p><h:outputText value="#{loginEmpleadoBean.error}"></h:outputText></p>
                 </div>
-            <h:button outcome="/Cliente/LoginCliente" value="Login Cliente" />
+            <h:button outcome="/Cliente/LoginCliente" value="#{msg['logincliente']}" />
         </div>
     </h:body>
 </html>
