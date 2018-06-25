@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -26,7 +27,10 @@ public class LocaleBean implements Serializable {
         countries.put("Spanish", SPANISH);
         countries.put("English", ENGLISH);
     }
-
+    @PostConstruct
+    public void toInit(){
+        currentLocale = SPANISH;
+    }
     public String getLocaleCode() {
         return localeCode;
     }
@@ -70,5 +74,4 @@ public class LocaleBean implements Serializable {
         FacesContext.getCurrentInstance()
                 .getViewRoot().setLocale(currentLocale);
     }
-
 }

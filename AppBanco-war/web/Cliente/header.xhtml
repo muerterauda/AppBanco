@@ -8,12 +8,14 @@
         <ui:composition>
         <div id="nav">
             <div id="navegador">
+                <h:form>
                 <ul>
                     <li><h:link outcome="MovimientosCliente" value="#{msg['movimientos']}"/></li>
                     <li><h:link outcome="transferencias" value="#{msg['transferencias']}"/></li>
                     <li><h:link outcome="ayuda" value="#{msg['Ayuda']}"/></li>  
-                    <li><h:link outcome="LoginCliente" value="#{msg['Logout']}"/></li>
+                    <li><h:commandLink action="#{movimientosClienteBean.doLogout()}" value="#{msg['Logout']}"/></li>
                 </ul>
+                </h:form>
                 <div style="clear:both"></div>
             </div>
         </div>

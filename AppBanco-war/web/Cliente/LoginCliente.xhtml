@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-     <f:view locale="#{localeBean.currentLocale}"/>
+    <f:view locale="#{localeBean.currentLocale}"/>
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
@@ -24,13 +24,11 @@
                <p><span><h:outputText value="#{msg['Password']}"/></span><h:inputSecret value="#{LoginClienteBean.password}"></h:inputSecret></p>
                <hr />               
                <div class="form-button-center">
-                   <h:commandButton action="#{LoginClienteBean.doLogin()}" value="Entrar"></h:commandButton>
+                   <h:commandButton action="#{LoginClienteBean.doLogin()}" value="#{msg['Enviar']}"></h:commandButton>
                </div>
            </h:form>
                 <div class="error"> 
-                    <!--<p><h:outputLabel value="{LoginClienteBean.error}"></h:outputLabel></p>-->
-                    <p><h:outputLabel value="#{msg['errorUsuario']}" rendered="#{LoginClienteBean.doError()==1}"></h:outputLabel></p>
-                    <p><h:outputLabel value="#{msg['errorPassword']}" rendered="#{LoginClienteBean.doError()==2}"></h:outputLabel></p>
+                    <p><h:outputLabel value="#{msg[LoginClienteBean.error]}"></h:outputLabel></p>
                 </div>
             <h:button outcome="/Empleado/loginEmpleado" value="#{msg['loginEmpleado']}" />
     </div>

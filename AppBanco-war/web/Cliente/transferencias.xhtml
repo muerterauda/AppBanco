@@ -18,28 +18,28 @@
             </ui:insert>
             <div id="content">
                 <p>
-                    Tienes un saldo : #{traspasoClienteBean.saldo}
+                    #{msg.tSaldo} #{traspasoClienteBean.saldo}
                 </p>
                 <h:form>
                     <p>
-                        <span>Cuenta destino : </span>
+                        <span>#{msg.tCuentaDestino} </span>
                         <h:inputText id="inputCuenta"
                                      value="#{traspasoClienteBean.cuentaStr}" />
                     </p>
                     <p>
-                        <span>Importe :  </span>
+                        <span>#{msg.tImporte}  </span>
                         <h:inputText id="inputImporte"
                                      value="#{traspasoClienteBean.cantidad}" />
                     </p>
                     <div class="form-button-center">
                         <h:commandButton id="buttonEnviar"
-                                         value="Enviar"
+                                         value="#{msg.tTransferir}"
                                          type="submit"
                                          action="#{traspasoClienteBean.doTransfer()}">
                         </h:commandButton>
                     </div>
                     <p style="color: red;">
-                        #{traspasoClienteBean.errorMsg}
+                        #{msg[traspasoClienteBean.errorMsg]}
                     </p>
                 </h:form>
             </div>

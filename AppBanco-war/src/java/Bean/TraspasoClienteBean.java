@@ -7,13 +7,14 @@ package Bean;
 
 import AppBanco.ejb.CuentaFacade;
 import AppBanco.entity.Cuenta;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedProperty;
 
 /**
  *
@@ -25,7 +26,6 @@ public class TraspasoClienteBean extends ClienteSessionBeanAbstract {
 
     @EJB
     private CuentaFacade cuentaEJB;
-    
     // Atributos de la vista
     private double saldo;
     private String cuentaStr;
@@ -72,6 +72,7 @@ public class TraspasoClienteBean extends ClienteSessionBeanAbstract {
         this.errorMsg = errorMsg;
     }
     
+    
     public String doTransfer() {
         Cuenta benefactor = cuentaEJB.findCuentaNumeroStr(cuentaStr);
         String paginaFin = null;
@@ -93,7 +94,7 @@ public class TraspasoClienteBean extends ClienteSessionBeanAbstract {
             }
 
         } else
-            setErrorMsg("El benefactor no existe.");
+            setErrorMsg("tError6");
         
         return paginaFin;
     }
@@ -101,19 +102,19 @@ public class TraspasoClienteBean extends ClienteSessionBeanAbstract {
     private void comprobarValidezTransferencia(Cuenta ordenante, Cuenta benefactor, double cantidad,
                                                double saldoOrd) {
         if (ordenante == null)
-            throw new NullPointerException("Se esperaba un ordenante no nulo");
+            throw new NullPointerException("tError1");
         
         if (benefactor == null)
-            throw new NullPointerException("Se esperaba un benefactor no nulo");
+            throw new NullPointerException("tError2");
         
         if (cantidad <= 0)
-            throw new IllegalArgumentException("Se esperaba un importe positivo mayor que 0");
+            throw new IllegalArgumentException("tError3");
         
         if (ordenante.equals(benefactor))
-            throw new IllegalArgumentException("El benefactor y el ordenante no puede ser el mismo");
+            throw new IllegalArgumentException("tError4");
         
         if (saldoOrd < cantidad) 
-            throw new RuntimeException("El ordenante no tiene suficiente saldo");
+            throw new RuntimeException("tError5");
 
     }
     

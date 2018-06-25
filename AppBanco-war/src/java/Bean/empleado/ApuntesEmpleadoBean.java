@@ -52,7 +52,7 @@ public class ApuntesEmpleadoBean {
             movimientos = movEJB.buscarPorCuenta(session.getCuenta());
         }
         else
-            setError("No existe la cuenta.");
+            setError("aError1");
     }
 
     public void setError(String error) {

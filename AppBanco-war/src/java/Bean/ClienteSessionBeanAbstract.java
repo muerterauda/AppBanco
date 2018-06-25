@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
+import language.LocaleBean;
 
 /**
  *
@@ -24,6 +25,7 @@ import javax.inject.Inject;
 public abstract class ClienteSessionBeanAbstract {
     @Inject
     private LoginClienteBean l;
+    
     private Cliente cliente;
     private double saldo;
     private Cuenta cuenta;
@@ -49,7 +51,8 @@ public abstract class ClienteSessionBeanAbstract {
     }
     
     public String doLogout(){
-        return "LoginCliente.xhtml";
+        l.setCliente(null);
+        return "LoginCliente";
     }
     @PostConstruct
     public void falsoConstruct(){
