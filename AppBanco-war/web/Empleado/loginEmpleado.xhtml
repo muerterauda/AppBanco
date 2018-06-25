@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{localeBean.currentLocale}"/>
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
@@ -21,7 +22,7 @@
                 <p> <span> <h:outputText value="#{msg['Password']}"/> </span> <h:inputSecret value="#{loginEmpleadoBean.password}"/> </p>
                 <hr />
                 <div class="form-button-center">
-                    <p> <h:commandButton action="#{loginEmpleadoBean.doLogin()}" value="Entrar"/> </p>
+                    <p> <h:commandButton action="#{loginEmpleadoBean.doLogin()}" value="#{msg.Enviar}"/> </p>
                 </div>
             </h:form>
                 <div class="error"> 

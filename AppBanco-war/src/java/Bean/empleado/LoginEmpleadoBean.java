@@ -114,5 +114,9 @@ public class LoginEmpleadoBean implements Serializable {
         
         return ret;
     }
-
+    public String doLogout(){
+        setEmpleado(null);
+        setError(null);
+        return "loginEmpleado";
+    }
 }

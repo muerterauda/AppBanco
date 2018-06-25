@@ -83,5 +83,10 @@ public class ApuntesEmpleadoBean {
         return movimientos;
     }
     
+    public String mainPage(){
+        session.setCuenta(null);
+        session.setCliente(null);
+        return "principalEmpleado";
+    }
     
 }

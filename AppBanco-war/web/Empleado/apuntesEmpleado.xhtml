@@ -21,9 +21,7 @@
                                      value="#{apuntesEmpleadoBean.inputCuenta}"/>
                         <h:commandButton value="#{msg.aBuscar}"
                                          action="#{apuntesEmpleadoBean.doSearchCuenta()}"/>
-                        <h:link outcome="principalEmpleado.xhtml"
-                                value="#{msg.aPrincipal}"
-                                class="button float-right"/>
+                        <h:commandLink action="#{apuntesEmpleadoBean.mainPage()}" value="#{msg.aPrincipal}" class="button float-right"/>
                     </h:form> 
                     <h:panelGroup rendered="#{apuntesEmpleadoBean.error != null}">
                         <p style="color: red;">#{msg[apuntesEmpleadoBean.error]}</p>
