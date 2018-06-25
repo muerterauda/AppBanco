@@ -12,13 +12,18 @@
     <h:body>
         <div id="content-app-medium">
             <h:form>
+               
+                <h:selectOneMenu value="#{localeBean.localeCode}" onchange="submit()" valueChangeListener="#{localeBean.setLocale}">
+                    <f:selectItems value="#{localeBean.countriesInMap}"></f:selectItems>
+                </h:selectOneMenu>
+           
                 <h2> #{ EmpleadoSessionBeanAbstract.cliente.dni }</h2>
                 <hr/>
-                <p><span>Cantidad: </span><h:inputText value="#{NuevoApunteBean.cantidadTexto}"  /></p>
-                <p><span>Accion</span> 
+                <p><span><h:outputText value="#{msg['cantidad']}"/> </span><h:inputText value="#{NuevoApunteBean.cantidadTexto}"  /></p>
+                <p><span><h:outputText value="#{msg['accion']}"/></span> 
                     <h:selectOneRadio value="#{NuevoApunteBean.tipo}">
-                        <f:selectItem itemValue="I" itemLabel="Ingreso"  />
-                        <f:selectItem itemValue="R" itemLabel="Reintegro"/>
+                        <f:selectItem itemValue="I" itemLabel="#{msg['ingreso']}"  />
+                        <f:selectItem itemValue="R" itemLabel="#{msg['reintegro']}" />
                     </h:selectOneRadio>
                     
                 </p>
@@ -27,8 +32,8 @@
                     <p><h:outputText value="#{NuevoApunteBean.error}"></h:outputText></p>
                 </div>
                 <div class="form-button-right">
-                    <h:button outcome="principalEmpleado" value="Cancelar"/>
-                    <h:commandButton action="#{ NuevoApunteBean.doApunte()}" value="Realizar Apunte"/>
+                    <h:button outcome="principalEmpleado" value="#{msg['cancelar']}"/>
+                    <h:commandButton action="#{ NuevoApunteBean.doApunte()}" value="#{msg['realizarapunte']}"/>
                 </div>
                 <div style="clear: both;"></div>
             </h:form>
