@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{localeBean.currentLocale}"/>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"/>
+        <title>Movimientos Cliente</title>
+    </h:head>
+    <h:body>
+        <div id="content-app">
+            <ui:insert name="content" >
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+            <div id="content">
+                <div id="content-header">
+                    <p>
+                        #{msg['hola']} <h:outputText value="#{movimientosClienteBean.cliente.nombre}"></h:outputText> #{msg['saldoIgualA']}
+                        <h:outputText value="#{movimientosClienteBean.saldo}"></h:outputText>.
+                    </p>
+                </div>
+                <div id="content-main">
+                    <h:dataTable id="datatable" value="#{movimientosClienteBean.movimientos}" var="mov" >
+                        <h:column>
+                            <f:facet name = "header"> #{msg['concepto']}</f:facet>
+                            #{mov.concepto}
+                        </h:column>
+                        <h:column>
+                            <f:facet name = "header">#{msg['fechaComprobante']}</f:facet>
+                            #{mov.fecha}
+                        </h:column>
+                        <h:column>
+                            <f:facet name = "header">#{msg['value']}</f:facet>
+                            #{mov.importe}
+                        </h:column>
+                        <h:column>
+                            <f:facet name = "header">#{msg['balanceAfter']}</f:facet>
+                            #{mov.saldo}
+                        </h:column>
+                    </h:dataTable>
+                </div>
+                <div id="content-side">
+                    <h:form>
+                        <h:inputText value="#{movimientosClienteBean.conceptoFiltro}"
+                                     id="inputconceptofiltro">
+                            <f:ajax  render="datatable"
+                                     listener="#{movimientosClienteBean.doFilter()}"
+                                     execute="@all"
+                                     event="keyup"/>
+                        </h:inputText>
+                        <div class="checkbox-rounded">
+                            <label class="switch">
+                                <h:selectBooleanCheckbox value="#{movimientosClienteBean.ingresos}">
+                                    <f:ajax listener="#{movimientosClienteBean.doFilter()}"
+                                            render="datatable"
+                                            execute="@all"
+                                            />
+                                </h:selectBooleanCheckbox>
+                                <span class="slider round"></span>
+                            </label>
+                            <p>Ingresos</p>
+                        </div>
+                        <div class="checkbox-rounded">
+                            <label class="switch">
+                                <h:selectBooleanCheckbox value="#{movimientosClienteBean.gastos}">
+                                    <f:ajax listener="#{movimientosClienteBean.doFilter()}"
+                                            render="datatable"
+                                            execute="@all"
+                                            />
+                                </h:selectBooleanCheckbox>
+                                <span class="slider round"></span>
+                            </label>
+                            <p>Gastos</p>
+                        </div>
+                    </h:form>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
