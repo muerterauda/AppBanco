@@ -6,6 +6,8 @@
 package Bean.empleado;
 
 import AppBanco.ejb.ClienteFacade;
+import AppBanco.ejb.CuentaFacade;
+import AppBanco.entity.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -27,6 +29,9 @@ public class NuevoClienteBean {
 
     @EJB
     private ClienteFacade clientefa;
+    @EJB
+    private CuentaFacade cuentaFa;
+    
     private String nombre;
     private String apellidos;
     private String dni;
@@ -67,8 +72,10 @@ public class NuevoClienteBean {
             
             page = "altaClienteForm.xhtml";
         }else{
-            session.setCliente(clientefa.insertarCliente(nombre, apellidos, dni, email, direccion, telefono)); 
-           page="resultAltaClienteForm.xhtml";
+            Cliente c=clientefa.insertarCliente(nombre, apellidos, dni, email, direccion, telefono);
+            session.setCliente(c); 
+            session.setCuenta(cuentaFa.crearCuenta(c));
+            page="resultAltaClienteForm.xhtml";
         }
         return page;
     }
@@ -147,4 +154,11 @@ public class NuevoClienteBean {
     public void setError(List<String> error) {
         this.error = error;
     }
+    
+    public String mainPage(){
+        session.setCuenta(null);
+        session.setCliente(null);
+        return "principalEmpleado";
+    }
+    
 }

@@ -18,7 +18,9 @@
                 #{msg.usuarioexito}
             </p>
             <div class="form-button-right">
-                <h:button outcome="principalEmpleado.xhtml" value="#{msg.volver}"/> 
+                <h:form>
+                    <h:commandLink action="#{NuevoClienteBean.mainPage()}" value="#{msg.aPrincipal}" class="button"/>
+                </h:form>
                 <h:button outcome="nuevoApunte.xhtml" value="#{msg.realizarapunte}"/> 
                 <div style="clear: both;"></div>
             </div>
