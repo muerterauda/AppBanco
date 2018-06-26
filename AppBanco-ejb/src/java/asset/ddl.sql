@@ -86,10 +86,10 @@ INSERT INTO OPERACION(empleado,tipo) VALUES
 (NULL, 'TRANSPASO');
 
 INSERT INTO MOVIMIENTO(cuenta,operacion,concepto,fecha,importe,saldo) VALUES
-(1, 1, 'Ingreso inicial', NOW(), 1000, 0),
-(1, 2, 'Ingreso por que si', DATE_ADD(NOW(), INTERVAL 1 HOUR), 500, 1500),
-(1, 3, 'Capricho', DATE_ADD(NOW(), INTERVAL 2 HOUR), -750, 750),
-(2, 4, 'Ingreso inicial', DATE_ADD(NOW(),INTERVAL 3 HOUR), 2000, 2000),
-(2, 5, 'Capricho 2', DATE_ADD(NOW(), INTERVAL 4 HOUR), -750, 1250),
-(1, 6, 'Transpaso a ES0012341234990000000002', DATE_ADD(NOW(), INTERVAL 5 HOUR), -200, 550),
-(2, 6, 'Transpaso a ES0012341234990000000001', DATE_ADD(NOW(), INTERVAL 5 HOUR), 200, 1450);
+(1, 1, 'Ingreso inicial', DATE_SUB(NOW(), INTERVAL 5 HOUR), 1000, 0),
+(1, 2, 'Ingreso por que si', DATE_SUB(NOW(), INTERVAL 4 HOUR), 500, 1500),
+(1, 3, 'Capricho', DATE_SUB(NOW(), INTERVAL 3 HOUR), -750, 750),
+(2, 4, 'Ingreso inicial', DATE_SUB(NOW(),INTERVAL 5 HOUR), 2000, 2000),
+(2, 5, 'Capricho 2', DATE_SUB(NOW(), INTERVAL 4 HOUR), -750, 1250),
+(1, 6, 'Transpaso a ES0012341234990000000002', DATE_SUB(NOW(), INTERVAL 2 HOUR), -200, 550),
+(2, 6, 'Transpaso a ES0012341234990000000001', DATE_SUB(NOW(), INTERVAL 2 HOUR), 200, 1450);

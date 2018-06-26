@@ -138,5 +138,7 @@ public class MovimientoFacade extends AbstractFacade<Movimiento> {
             create(movSuma);
         }
     }
-
+    public List<Movimiento> buscarPorCuenta(Cuenta c){
+        return buscarPorCuentaOrderByFechaDesc(c, Boolean.TRUE, Boolean.TRUE, null);
+    }
 }

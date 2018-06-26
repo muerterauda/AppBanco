@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view locale="#{localeBean.currentLocale}"/>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Apuntes</title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+        <div id="content-app">
+            <div id="content">
+                <div id="content-header">
+                    <h:form id="search-mov-form">
+                        <span>#{msg.aCuentaCliente} </span>
+                        <h:inputText id="inputSearchCuenta"
+                                     value="#{apuntesEmpleadoBean.inputCuenta}" size="25" />
+                        <h:commandButton value="#{msg.aBuscar}"
+                                         action="#{apuntesEmpleadoBean.doSearchCuenta()}"/>
+                        <h:commandLink action="#{apuntesEmpleadoBean.mainPage()}" value="#{msg.aPrincipal}" class="button float-right"/>
+                    </h:form> 
+                    <h:panelGroup rendered="#{apuntesEmpleadoBean.error != null}">
+                        <p style="color: red;">#{msg[apuntesEmpleadoBean.error]}</p>
+                    </h:panelGroup>
+                </div>
+                <div id="content-main">
+                    <h:dataTable  class="full-width"
+                                  rendered="#{apuntesEmpleadoBean.movimientos != null}"
+                                  value="#{apuntesEmpleadoBean.movimientos}"
+                                  var="mov">
+                        <h:column>
+                            <f:facet name = "header">#{msg.concepto}</f:facet>
+                            #{mov.concepto}
+                        </h:column>
+                        <h:column>
+                            <f:facet name = "header">#{msg.fechaComprobante}</f:facet>
+                            #{mov.fecha}
+                        </h:column>
+                        <h:column>
+                            <f:facet name = "header">#{msg.value}</f:facet>
+                            #{mov.importe}
+                        </h:column>
+                        <h:column>
+                            <f:facet name = "header">#{msg.balanceAfter}</f:facet>
+                            #{mov.saldo}
+                        </h:column>
+                    </h:dataTable>
+                </div>
+                <h:panelGroup id="content-side"
+                              rendered="#{apuntesEmpleadoBean.cliente != null}">
+                    <dl>
+                        <dt>#{msg.DNI}</dt>
+                        <dd>#{apuntesEmpleadoBean.cliente.dni}</dd>
+                        <dt>#{msg.aNombre}</dt>
+                        <dd>#{apuntesEmpleadoBean.cliente.nombre}</dd>
+                        <dt>#{msg.aApellido}</dt>
+                        <dd>#{apuntesEmpleadoBean.cliente.apellidos}</dd>
+                        <dt>E-mail</dt>
+                        <dd>#{apuntesEmpleadoBean.cliente.email}</dd>
+                        <dt>#{msg.aDireccion}</dt>
+                        <dd>#{apuntesEmpleadoBean.cliente.direccion}</dd>
+                    </dl>
+                    <h:link class="button" outcome="nuevoApunte"
+                            value="#{msg.aNuevoApunte}"/>
+                </h:panelGroup>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

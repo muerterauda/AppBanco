@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"/>
+    </h:head>
+     <f:view locale="#{localeBean.currentLocale}"/>
+    <h:body>
+        <div id="content-app">
+            <ui:insert name="content" >
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+            <div id="content">
+                <p>
+                    #{msg.tSaldo} #{traspasoClienteBean.saldo}
+                </p>
+                <h:form>
+                    <p>
+                        <span>#{msg.tCuentaDestino} </span>
+                        <h:inputText id="inputCuenta"
+                                     value="#{traspasoClienteBean.cuentaStr}" />
+                    </p>
+                    <p>
+                        <span>#{msg.tImporte}  </span>
+                        <h:inputText id="inputImporte"
+                                     value="#{traspasoClienteBean.cantidad}" />
+                    </p>
+                    <div class="form-button-center">
+                        <h:commandButton id="buttonEnviar"
+                                         value="#{msg.tTransferir}"
+                                         type="submit"
+                                         action="#{traspasoClienteBean.doTransfer()}">
+                        </h:commandButton>
+                    </div>
+                    <p style="color: red;">
+                        #{msg[traspasoClienteBean.errorMsg]}
+                    </p>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>
+
