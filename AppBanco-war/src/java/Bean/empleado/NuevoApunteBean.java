@@ -5,7 +5,7 @@
  */
 package Bean.empleado;
 
-import AppBanco.ejb.EmpleadoFacade;
+
 import AppBanco.ejb.MovimientoFacade;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -37,10 +37,11 @@ public class NuevoApunteBean implements Serializable {
      * Creates a new instance of nuevoApunteBean
      */
     public NuevoApunteBean() {
+        
     }
+    
     @PostConstruct
     public void init(){
-        error="";
         tipo="I";
         cantidadTexto="";
     }
@@ -70,16 +71,19 @@ public class NuevoApunteBean implements Serializable {
     }
     
     public String doApunte(){
-        String ret="nuevoApunte.xhtml";
+        error="";
+        String ret="nuevoApunte";
         try{
         double dinero=Double.parseDouble(cantidadTexto);
         
         movimientoFacade.nuevoApunte(tipo, empleadosession.getEmpleado() , empleadosession.getCuenta(), dinero);
         }catch(NumberFormatException e){
-            setError("La cantidad introducida no es un numero");
+            setError("errorApunte1");
+        }catch(Exception e){
+            setError("errorApunte2");
         }
         if(error.equals("")){
-            ret="principalEmpleado";
+            ret="apuntesEmpleado";
         }
         
         
